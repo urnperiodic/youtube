@@ -1,41 +1,16 @@
 // ============================================================
-//  MAIN — Firebase init + entry point (Modular SDK)
+//  MAIN — Firebase init + entry point
 // ============================================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
-import API from "./api.js";
-import CONFIG from "./config.js";
-import MAP from "./map.js";
-import Game from "./game.js";
-import UI from "./ui.js";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCUdXqdFCzyEmORFjUVBDxRiTSsipSack0",
-  authDomain: "among-us-42dfe.firebaseapp.com",
-  databaseURL: "https://among-us-42dfe-default-rtdb.firebaseio.com",
-  projectId: "among-us-42dfe",
-  storageBucket: "among-us-42dfe.firebasestorage.app",
-  messagingSenderId: "571898379716",
-  appId: "1:571898379716:web:ed81ba6b6b47a5bbf63891"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Make globals accessible to HTML (for onclick handlers and inline scripts)
-window.firebaseApp = app;
-window.firebaseDatabase = database;
-window.Game = Game;
-window.UI = UI;
-window.API = API;
-window.CONFIG = CONFIG;
-window.MAP = MAP;
-
-// DOMContentLoaded handler
 window.addEventListener('DOMContentLoaded', () => {
+
+  // ---- Firebase init ----
+  if (CONFIG.FIREBASE.apiKey === 'YOUR_API_KEY') {
+    setTimeout(() => UI.toast('⚠️ Add your Firebase config in js/config.js!', 'error'), 600);
+  } else {
+    firebase.initializeApp(CONFIG.FIREBASE);
+  }
+
   // ---- Starfield ----
   document.querySelectorAll('.stars').forEach(container => {
     for (let i = 0; i < 80; i++) {
@@ -50,9 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ---- Show menu ----
-  UI.showMenu();
-
   // ---- Unload cleanup ----
   window.addEventListener('beforeunload', () => {
     if (Game.code && Game.playerId) Game.leave();
@@ -64,7 +36,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupTouchControls() {
   const canvas = document.getElementById('gameCanvas');
-  if (!canvas) return;
   let touchStart = null;
 
   canvas.addEventListener('touchstart', e => {
