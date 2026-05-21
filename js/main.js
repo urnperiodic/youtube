@@ -25,6 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ---- Show menu ----
+  UI.showMenu();
+
   // ---- Unload cleanup ----
   window.addEventListener('beforeunload', () => {
     if (Game.code && Game.playerId) Game.leave();
