@@ -1,6 +1,5 @@
 // ============================================================
 //  GAME — Core game logic (Firebase realtime version)
-//  No polling. Firebase listeners push all state changes.
 // ============================================================
 
 const Game = {
@@ -9,31 +8,24 @@ const Game = {
   playerName:  null,
   isHost:      false,
 
-  // Live state (assembled from Firebase listeners)
-  room:        null,   // room metadata + settings + state
-  players:     {},     // { [id]: playerObj }
+  room:        null,
+  players:     {},
   chat:        [],
 
-  // Derived convenience refs
   myRole:      null,
   myStatus:    null,
   myPlayer:    null,
 
-  // Input / timing
   keys:        {},
   lastMove:    0,
   lastKillTs:  0,
 
-  // RAF handle
   animFrame:   null,
-
-  // Firebase unsubscribe fns
   _unsubs:     [],
 
-  // ---- ID ----
   _genId() { return 'p_' + Math.random().toString(36).substr(2, 9); },
 
-  // ---- CREATE / JOIN ----
+  // ---- CREATE ----
 
   async createRoom() {
     const name = document.getElementById('playerName').value.trim() || 'Player';
@@ -50,12 +42,21 @@ const Game = {
       this.code = code;
       document.getElementById('createdCode').textContent = code;
       document.getElementById('createSpinner').style.display = 'none';
-      setTimeout(() => { UI.showScreen('screen-lobby'); this._attachListeners(); }, 1200);
+      setTimeout(() => {
+        UI.showScreen('screen-lobby');
+        // Set code immediately — don't wait for listener
+        document.getElementById('lobbyCode').textContent = code;
+        document.getElementById('startBtn').style.display = 'block';
+        document.getElementById('waitMsg').style.display  = 'none';
+        this._attachListeners();
+      }, 1000);
     } catch (e) {
       UI.toast('Failed to create room: ' + e.message, 'error');
       UI.showScreen('screen-menu');
     }
   },
+
+  // ---- JOIN ----
 
   async joinRoom() {
     const code = document.getElementById('joinCode').value.trim().toUpperCase();
@@ -71,30 +72,38 @@ const Game = {
       const data = await API.joinRoom(code, this.playerId, name);
       this.isHost = data.isHost;
       UI.showScreen('screen-lobby');
+      // Set code immediately — don't wait for listener
+      document.getElementById('lobbyCode').textContent = code;
+      document.getElementById('startBtn').style.display = this.isHost ? 'block' : 'none';
+      document.getElementById('waitMsg').style.display  = this.isHost ? 'none'  : 'block';
       this._attachListeners();
     } catch (e) {
       UI.toast(e.message, 'error');
     }
   },
 
-  // ---- FIREBASE LISTENERS ----
-  // These replace ALL polling. Firebase calls the callbacks instantly
-  // whenever data changes in the DB (~50-150ms latency).
+  // ---- LISTENERS ----
 
   _attachListeners() {
-    // Room listener: settings, phase, state (sabotage, doors, meeting, bodies, winner)
+    // Room listener — fires instantly on connect, then on every change
     const offRoom = API.listenRoom(this.code, room => {
       const prevPhase = this.room?.phase;
       this.room = room;
+
+      // Always update lobby code + settings as soon as room data arrives
+      if (room.phase === 'lobby') {
+        document.getElementById('lobbyCode').textContent = this.code;
+        UI.updateLobby(this._buildViewState());
+      }
+
       this._onRoomChange(prevPhase, room);
     });
 
-    // Players listener: positions, roles, tasks, statuses
+    // Players listener
     const offPlayers = API.listenPlayers(this.code, players => {
       this.players = players;
       this._refreshMyPlayer();
-      // Re-render HUD without full phase logic
-      if (this.room?.phase === 'game') UI.updateHUD(this._buildViewState());
+      if (this.room?.phase === 'game')  UI.updateHUD(this._buildViewState());
       if (this.room?.phase === 'lobby') UI.updateLobby(this._buildViewState());
     });
 
@@ -116,17 +125,15 @@ const Game = {
   _onRoomChange(prevPhase, room) {
     const phase = room.phase;
 
-    // Update sabotage alert every room tick
     if (phase === 'game') UI.updateSabotageAlert(room.state?.sabotage);
 
+    // Same phase — already handled above / in player listener
     if (prevPhase === phase) {
-      // Same phase — just refresh current screen
-      if (phase === 'lobby')   UI.updateLobby(this._buildViewState());
       if (phase === 'meeting') UI.updateMeeting(this._buildViewState());
       return;
     }
 
-    // Phase changed!
+    // Phase transition
     if (phase === 'game' && prevPhase === 'lobby') {
       UI.showScreen('screen-game');
       this._startGameLoop();
@@ -149,10 +156,8 @@ const Game = {
     this.myStatus = this.myPlayer?.status || null;
   },
 
-  // Build a unified view object that UI.js expects
   _buildViewState() {
     const playerArr = Object.values(this.players).map((p, i) => {
-      // Ghost visibility: hide from living crewmates
       if (p.status === 'ghost' && this.myStatus === 'alive' && this.myRole !== 'impostor' && p.id !== this.playerId) {
         return { ...p, x: -9999, y: -9999, visible: false, isGhost: true };
       }
@@ -172,7 +177,7 @@ const Game = {
     };
   },
 
-  // ---- GAME LOOP (render only, no data fetching) ----
+  // ---- GAME LOOP ----
 
   _startGameLoop() {
     UI.updateHUD(this._buildViewState());
@@ -186,7 +191,6 @@ const Game = {
   },
 
   _setupInput() {
-    // Remove old listeners to avoid duplicates on re-entry
     window.onkeydown = e => {
       this.keys[e.code] = true;
       if (e.code === 'KeyE') this.tryInteract();
@@ -203,7 +207,6 @@ const Game = {
         this.tryInteractAt(pos.x, pos.y);
       });
     }
-
     Renderer.init(canvas);
   },
 
@@ -222,7 +225,6 @@ const Game = {
       if (dx && dy) { dx *= 0.707; dy *= 0.707; }
       const nx = Math.max(50, Math.min(MAP.WIDTH  - 50, this.myPlayer.x + dx));
       const ny = Math.max(50, Math.min(MAP.HEIGHT - 50, this.myPlayer.y + dy));
-      // Update local copy immediately for smooth feel
       this.myPlayer.x = nx;
       this.myPlayer.y = ny;
       this.players[this.playerId].x = nx;
@@ -277,7 +279,6 @@ const Game = {
     const r  = CONFIG.INTERACT_RADIUS;
     const state = this.room?.state || {};
 
-    // My tasks (object form from Firebase)
     const myTasks = Object.values(this.myPlayer.tasks || {});
     for (const mapTask of MAP.TASKS) {
       const t = myTasks.find(mt => mt.room === mapTask.room && mt.type === mapTask.type && !mt.done);
@@ -286,18 +287,15 @@ const Game = {
         return { label: `[E] ${mapTask.type}`, action: () => this.doTask(t.id) };
     }
 
-    // Bodies
     for (const body of Object.values(state.bodies || {})) {
       if (!body.reportedBy && Math.hypot(mx - body.x, my - body.y) < r)
         return { label: '[E] Report Body', action: () => this.report(body.id) };
     }
 
-    // Emergency button
     const eb = MAP.EMERGENCY_BTN;
     if (Math.hypot(mx - eb.x, my - eb.y) < r)
       return { label: '[E] Emergency Meeting', action: () => this.callMeeting() };
 
-    // Sabotage fix
     if (state.sabotage) {
       const fixes = MAP.SABOTAGE_FIX[state.sabotage.type] || [];
       for (const fix of fixes) {
@@ -375,7 +373,6 @@ const Game = {
       await API.completeTask(this.code, this.playerId, taskId);
       UI.toast('Task complete! ✅', 'success');
       UI.hideTaskPanel();
-      // Optimistic local update
       if (this.myPlayer?.tasks?.[taskId]) this.myPlayer.tasks[taskId].done = true;
     } catch (e) { UI.toast(e.message, 'error'); }
   },
