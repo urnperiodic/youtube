@@ -81,8 +81,8 @@ const UI = {
         <input type="number" id="s_votingTime"         value="${s.votingTime}"         min="30" max="300"></div>
       <div class="setting-item"><label>Confirm Ejects</label>
         <select id="s_confirmEjects">
-          <option value="true"  ${s.confirmEjects ? 'selected':''}>On</option>
-          <option value="false" ${!s.confirmEjects ? 'selected':''}>Off</option>
+          <option value="true"  ${s.confirmEjects ? 'selected':''}​>On</option>
+          <option value="false" ${!s.confirmEjects ? 'selected':''}​>Off</option>
         </select></div>
     `;
   },
@@ -456,3 +456,5 @@ const UI = {
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   },
 };
+
+export default UI;

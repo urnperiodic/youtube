@@ -4,6 +4,11 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+import API from "./api.js";
+import CONFIG from "./config.js";
+import MAP from "./map.js";
+import Game from "./game.js";
+import UI from "./ui.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,18 +25,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Make available globally for API module
+// Make globals accessible to HTML (for onclick handlers and inline scripts)
 window.firebaseApp = app;
 window.firebaseDatabase = database;
+window.Game = Game;
+window.UI = UI;
+window.API = API;
+window.CONFIG = CONFIG;
+window.MAP = MAP;
 
-// Load other scripts
-Promise.all([
-  import('./config.js'),
-  import('./map.js'),
-  import('./api.js'),
-  import('./game.js'),
-  import('./ui.js')
-]).then(() => {
+// DOMContentLoaded handler
+window.addEventListener('DOMContentLoaded', () => {
   // ---- Starfield ----
   document.querySelectorAll('.stars').forEach(container => {
     for (let i = 0; i < 80; i++) {
@@ -56,13 +60,11 @@ Promise.all([
 
   // ---- Mobile touch joystick ----
   setupTouchControls();
-}).catch(err => {
-  console.error('Failed to load game modules:', err);
-  alert('Error loading game. Check console.');
 });
 
 function setupTouchControls() {
   const canvas = document.getElementById('gameCanvas');
+  if (!canvas) return;
   let touchStart = null;
 
   canvas.addEventListener('touchstart', e => {

@@ -442,3 +442,5 @@ const Game = {
     this.players = {}; this.chat = [];
   },
 };
+
+export default Game;
