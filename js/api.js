@@ -1,57 +1,48 @@
 // ============================================================
-//  API — Firebase Realtime Database (Modular SDK)
+//  API — Firebase Realtime Database
 //  All reads use onValue() listeners (push, ~50ms).
 //  All writes use set() / update() / push().
 // ============================================================
 
-import { getDatabase, ref, get, set, update, push, onValue, off, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
-
-const db = getDatabase(window.firebaseApp);
+// Firebase SDK (loaded via CDN in index.html)
+let _db;
 
 const API = {
   // ---- internal helpers ----
 
   db() {
-    return db;
+    if (!_db) throw new Error('Firebase not initialised — call API.init() first');
+    return _db;
   },
 
   ref(path) {
-    return ref(db, path);
+    return firebase.database().ref(path);
   },
 
   async get(path) {
-    const snapshot = await get(this.ref(path));
-    return snapshot.exists() ? snapshot.val() : null;
+    const snap = await this.ref(path).get();
+    return snap.exists() ? snap.val() : null;
   },
 
   async set(path, value) {
-    await set(this.ref(path), value);
+    await this.ref(path).set(value);
   },
 
   async update(path, value) {
-    await update(this.ref(path), value);
+    await this.ref(path).update(value);
   },
 
   async push(path, value) {
-    const newRef = await push(this.ref(path), value);
-    return newRef.key;
+    const ref = await this.ref(path).push(value);
+    return ref.key;
   },
 
   async transaction(path, fn) {
     return new Promise((resolve, reject) => {
-      const dbRef = this.ref(path);
-      onValue(dbRef, (snapshot) => {
-        try {
-          const newValue = fn(snapshot.val());
-          if (newValue !== undefined) {
-            set(dbRef, newValue).then(() => {
-              resolve({ committed: true, value: newValue });
-            }).catch(reject);
-          }
-        } catch (err) {
-          reject(err);
-        }
-      }, { onlyOnce: true });
+      this.ref(path).transaction(fn, (err, committed, snap) => {
+        if (err) reject(err);
+        else resolve({ committed, value: snap?.val() });
+      });
     });
   },
 
@@ -73,7 +64,7 @@ const API = {
         bodies: {}, sabotage: null, doors: this._initDoors(),
         meeting: null, lastEmergency: 0, winner: null, lastSabotage: 0,
       },
-      createdAt: serverTimestamp(),
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
     };
 
     await this.set(`rooms/${code}`, room);
@@ -105,34 +96,34 @@ const API = {
   // ---- live listeners (replaces polling) ----
 
   listenRoom(code, cb) {
-    const dbRef = this.ref(`rooms/${code}`);
-    const unsubscribe = onValue(dbRef, snap => {
+    const ref = this.ref(`rooms/${code}`);
+    ref.on('value', snap => {
       if (snap.exists()) cb(snap.val());
     });
-    return unsubscribe;
+    return () => ref.off('value');
   },
 
   listenPlayers(code, cb) {
-    const dbRef = this.ref(`rooms/${code}/players`);
-    const unsubscribe = onValue(dbRef, snap => cb(snap.val() || {}));
-    return unsubscribe;
+    const ref = this.ref(`rooms/${code}/players`);
+    ref.on('value', snap => cb(snap.val() || {}));
+    return () => ref.off('value');
   },
 
   listenChat(code, cb) {
     // Only last 50 messages
-    const dbRef = this.ref(`rooms/${code}/chat`);
-    const unsubscribe = onValue(dbRef, snap => {
+    const ref = this.ref(`rooms/${code}/chat`).limitToLast(50);
+    ref.on('value', snap => {
       const msgs = [];
       snap.forEach(c => msgs.push(c.val()));
       cb(msgs);
     });
-    return unsubscribe;
+    return () => ref.off('value');
   },
 
-  stopListening(code, unsubscribers) {
-    if (unsubscribers) {
-      unsubscribers.forEach(unsub => unsub());
-    }
+  stopListening(code) {
+    this.ref(`rooms/${code}`).off();
+    this.ref(`rooms/${code}/players`).off();
+    this.ref(`rooms/${code}/chat`).off();
   },
 
   // ---- game actions ----
@@ -175,7 +166,7 @@ const API = {
     updates[`rooms/${code}/state/lastSabotage`] = 0;
     updates[`rooms/${code}/state/lastEmergency`]= 0;
 
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
   },
 
   async move(code, playerId, x, y) {
@@ -189,7 +180,7 @@ const API = {
     // body keyed by targetId
     updates[`rooms/${code}/state/bodies/${targetId}`] = { id: targetId, x, y, reportedBy: null };
     updates[`rooms/${code}/state/killCooldowns/${killerId}`] = Date.now();
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
     await this._checkWin(code);
   },
 
@@ -214,7 +205,7 @@ const API = {
     updates[`rooms/${code}/state/bodies/${bodyId}/reportedBy`] = reporterId;
     updates[`rooms/${code}/state/meeting`]                     = meeting;
     updates[`rooms/${code}/phase`]                             = 'meeting';
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
     await this._addChat(code, 'SYSTEM', `🔴 Body reported by ${reporterId}!`);
   },
 
@@ -240,12 +231,12 @@ const API = {
     updates[`rooms/${code}/state/meeting`]        = meeting;
     updates[`rooms/${code}/state/lastEmergency`]  = now;
     updates[`rooms/${code}/phase`]                = 'meeting';
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
     await this._addChat(code, 'SYSTEM', `🚨 ${callerId} called an emergency meeting!`);
   },
 
   async vote(code, voterId, targetId) {
-    // Use a transaction-like approach
+    // Use a transaction so two voters can't write simultaneously and corrupt
     const { value: meeting } = await this.transaction(
       `rooms/${code}/state/meeting`,
       (m) => {
@@ -293,7 +284,7 @@ const API = {
     const updates = {};
     updates[`rooms/${code}/state/sabotage`]    = sab;
     updates[`rooms/${code}/state/lastSabotage`]= now;
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
     await this._addChat(code, 'SYSTEM', `⚠️ ${sabType.toUpperCase()} SABOTAGED!`);
   },
 
@@ -350,8 +341,7 @@ const API = {
   },
 
   async leaveRoom(code, playerId) {
-    const dbRef = ref(db, `rooms/${code}/players/${playerId}`);
-    await set(dbRef, null);
+    await this.ref(`rooms/${code}/players/${playerId}`).remove();
   },
 
   // ---- private helpers ----
@@ -359,7 +349,7 @@ const API = {
   async _addChat(code, sender, message, senderId) {
     await this.push(`rooms/${code}/chat`, {
       sender, message, senderId: senderId || null,
-      time: serverTimestamp(),
+      time: firebase.database.ServerValue.TIMESTAMP,
     });
   },
 
@@ -394,7 +384,7 @@ const API = {
       await this._addChat(code, 'SYSTEM', tie ? '⚖️ Tied vote — no ejection.' : '⚖️ Crew voted to skip.');
     }
 
-    await update(ref(db), updates);
+    await firebase.database().ref().update(updates);
     await this._checkWin(code);
   },
 
@@ -450,5 +440,3 @@ const API = {
     return a;
   },
 };
-
-export default API;
