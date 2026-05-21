@@ -3,15 +3,15 @@
 // ============================================================
 
 const CONFIG = {
-  FIREBASE: {
-    apiKey:            "AIzaSyCUdXqdFCzyEmORFjUVBDxRiTSsipSack0",
-    authDomain:        "among-us-42dfe.firebaseapp.com",
-    databaseURL:       "https://among-us-42dfe-default-rtdb.firebaseio.com",
-    projectId:         "among-us-42dfe",
-    storageBucket:     "among-us-42dfe.firebasestorage.app",
-    messagingSenderId: "571898379716",
-    appId:             "1:571898379716:web:ed81ba6b6b47a5bbf63891",
-  },
+FIREBASE: {
+  apiKey:            "AIzaSyCUdXqdFCzyEmORFjUVBDxRiTSsipSack0",
+  authDomain:        "among-us-42dfe.firebaseapp.com",
+  databaseURL:       "https://among-us-42dfe-default-rtdb.firebaseio.com",
+  projectId:         "among-us-42dfe",
+  storageBucket:     "among-us-42dfe.firebasestorage.app",
+  messagingSenderId: "571898379716",
+  appId:             "1:571898379716:web:ed81ba6b6b47a5bbf63891",
+},
 
   MOVE_THROTTLE:   50,   // ms between position writes (20 updates/sec)
   SPEED:           4,    // pixels per frame
