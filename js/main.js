@@ -1,16 +1,37 @@
 // ============================================================
-//  MAIN — Firebase init + entry point
+//  MAIN — Firebase init + entry point (Modular SDK)
 // ============================================================
 
-window.addEventListener('DOMContentLoaded', () => {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
-  // ---- Firebase init ----
-  if (CONFIG.FIREBASE.apiKey === 'YOUR_API_KEY') {
-    setTimeout(() => UI.toast('⚠️ Add your Firebase config in js/config.js!', 'error'), 600);
-  } else {
-    firebase.initializeApp(CONFIG.FIREBASE);
-  }
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCUdXqdFCzyEmORFjUVBDxRiTSsipSack0",
+  authDomain: "among-us-42dfe.firebaseapp.com",
+  databaseURL: "https://among-us-42dfe-default-rtdb.firebaseio.com",
+  projectId: "among-us-42dfe",
+  storageBucket: "among-us-42dfe.firebasestorage.app",
+  messagingSenderId: "571898379716",
+  appId: "1:571898379716:web:ed81ba6b6b47a5bbf63891"
+};
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Make available globally for API module
+window.firebaseApp = app;
+window.firebaseDatabase = database;
+
+// Load other scripts
+Promise.all([
+  import('./config.js'),
+  import('./map.js'),
+  import('./api.js'),
+  import('./game.js'),
+  import('./ui.js')
+]).then(() => {
   // ---- Starfield ----
   document.querySelectorAll('.stars').forEach(container => {
     for (let i = 0; i < 80; i++) {
@@ -35,6 +56,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ---- Mobile touch joystick ----
   setupTouchControls();
+}).catch(err => {
+  console.error('Failed to load game modules:', err);
+  alert('Error loading game. Check console.');
 });
 
 function setupTouchControls() {
