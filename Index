@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Among Us Online</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Firebase v9 compat (works with the sdk-style calls in api.js) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- SCREENS -->
+  <div id="screen-menu" class="screen active">
+    <div class="stars"></div>
+    <div class="menu-content">
+      <div class="logo-wrap">
+        <div class="logo-crewmate">
+          <div class="crewmate-body c-red"><div class="visor"></div></div>
+        </div>
+        <h1 class="game-title">AMONG<br><span>US</span></h1>
+        <div class="logo-crewmate ghost-float">
+          <div class="crewmate-body c-purple ghost"><div class="visor"></div></div>
+        </div>
+      </div>
+      <div class="menu-form">
+        <input type="text" id="playerName" placeholder="Your Name" maxlength="12">
+        <div class="menu-btns">
+          <button class="btn-primary" onclick="UI.showCreate()">Create Room</button>
+          <button class="btn-secondary" onclick="UI.showJoin()">Join Room</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-create" class="screen">
+    <div class="stars"></div>
+    <div class="panel">
+      <h2>Room Created!</h2>
+      <p>Share this code with friends</p>
+      <div class="room-code-display" id="createdCode">------</div>
+      <div class="spinner" id="createSpinner"></div>
+      <button class="btn-back" onclick="UI.showMenu()">← Back</button>
+    </div>
+  </div>
+
+  <div id="screen-join" class="screen">
+    <div class="stars"></div>
+    <div class="panel">
+      <h2>Join Room</h2>
+      <input type="text" id="joinCode" placeholder="Enter Code" maxlength="6" style="text-transform:uppercase">
+      <button class="btn-primary" onclick="Game.joinRoom()">Join</button>
+      <button class="btn-back" onclick="UI.showMenu()">← Back</button>
+    </div>
+  </div>
+
+  <div id="screen-lobby" class="screen">
+    <div class="stars"></div>
+    <div class="lobby-layout">
+      <div class="lobby-left">
+        <h2>Lobby</h2>
+        <div class="code-badge">Code: <span id="lobbyCode">------</span></div>
+        <div id="playerList" class="player-list"></div>
+        <button class="btn-primary" id="startBtn" onclick="Game.startGame()" style="display:none">▶ Start Game</button>
+        <p id="waitMsg" class="wait-msg">Waiting for host to start…</p>
+        <button class="btn-back" style="margin-top:12px" onclick="UI.showMenu()">← Leave</button>
+      </div>
+      <div class="lobby-right">
+        <div class="settings-panel" id="settingsPanel">
+          <h3>⚙️ Settings</h3>
+          <div class="settings-grid" id="settingsGrid">
+            <p style="color:var(--muted);font-size:13px">Loading…</p>
+          </div>
+          <button class="btn-secondary" id="saveSettingsBtn" onclick="Game.saveSettings()" style="display:none;margin-top:12px">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-game" class="screen">
+    <canvas id="gameCanvas"></canvas>
+    <div id="hud">
+      <div id="hudRole"></div>
+      <div id="hudTasks"></div>
+      <div id="sabotageAlert" class="sabotage-alert hidden"></div>
+    </div>
+    <div id="actionBtn" class="action-btn hidden"></div>
+    <div id="impostorPanel" class="impostor-panel hidden">
+      <button class="sab-btn" onclick="Game.openSabotage()">💀 Sabotage</button>
+      <button class="sab-btn" onclick="Game.openDoors()">🚪 Doors</button>
+    </div>
+    <button id="emergencyBtn" class="emergency-btn" onclick="Game.callMeeting()">🚨</button>
+    <div id="taskPanel"  class="task-panel  hidden"></div>
+    <div id="sabPanel"   class="sab-panel   hidden"></div>
+    <div id="doorsPanel" class="doors-panel hidden"></div>
+  </div>
+
+  <div id="screen-meeting" class="screen">
+    <div class="meeting-bg">
+      <div class="meeting-header">
+        <h2 id="meetingTitle">Emergency Meeting</h2>
+        <div id="meetingTimer" class="meeting-timer">–</div>
+      </div>
+      <div id="voteGrid" class="vote-grid"></div>
+      <div id="discussionLabel" class="discussion-label">DISCUSSION</div>
+      <button class="skip-btn" id="skipBtn" onclick="Game.vote('skip')">Skip Vote</button>
+      <div id="meetingChat" class="meeting-chat"></div>
+      <div class="meeting-chat-input">
+        <input type="text" id="meetingChatInput" placeholder="Say something…" maxlength="100"
+               onkeydown="if(event.key==='Enter') Game.sendChat()">
+        <button onclick="Game.sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-end" class="screen">
+    <div class="end-bg">
+      <div id="endTitle"  class="end-title"></div>
+      <div id="endRoles"  class="end-roles"></div>
+      <button class="btn-primary" onclick="UI.showMenu()">Main Menu</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<!-- Game scripts -->
+<script src="js/config.js"></script>
+<script src="js/map.js"></script>
+<script src="js/api.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
