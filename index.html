@@ -1,3 +1,4 @@
+cat > /mnt/user-data/outputs/among-us/index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Firebase v9 compat (works with the sdk-style calls in api.js) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<!-- Firebase COMPAT SDK — must load before any game script -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<!-- Config first (contains Firebase credentials + game constants) -->
+<script src="js/config.js"></script>
+
+<!-- Map data (needed by api.js _initDoors and startGame) -->
+<script src="js/map.js"></script>
+
+<!-- API (uses firebase.database() — safe after config.js inits Firebase in main.js) -->
+<script src="js/api.js"></script>
+
+<!-- Game logic -->
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+
+<!-- Main last — calls firebase.initializeApp() immediately -->
+<script src="js/main.js"></script>
 </head>
 <body>
 <div id="app">
 
-  <!-- SCREENS -->
   <div id="screen-menu" class="screen active">
     <div class="stars"></div>
     <div class="menu-content">
@@ -44,7 +60,7 @@
       <h2>Room Created!</h2>
       <p>Share this code with friends</p>
       <div class="room-code-display" id="createdCode">------</div>
-      <div class="spinner" id="createSpinner"></div>
+      <div class="spinner" id="createSpinner" style="display:none"></div>
       <button class="btn-back" onclick="UI.showMenu()">← Back</button>
     </div>
   </div>
@@ -53,7 +69,7 @@
     <div class="stars"></div>
     <div class="panel">
       <h2>Join Room</h2>
-      <input type="text" id="joinCode" placeholder="Enter Code" maxlength="6" style="text-transform:uppercase">
+      <input type="text" id="joinCode" placeholder="Enter Code" maxlength="6" style="text-transform:uppercase;letter-spacing:4px">
       <button class="btn-primary" onclick="Game.joinRoom()">Join</button>
       <button class="btn-back" onclick="UI.showMenu()">← Back</button>
     </div>
@@ -71,12 +87,12 @@
         <button class="btn-back" style="margin-top:12px" onclick="UI.showMenu()">← Leave</button>
       </div>
       <div class="lobby-right">
-        <div class="settings-panel" id="settingsPanel">
+        <div class="settings-panel">
           <h3>⚙️ Settings</h3>
           <div class="settings-grid" id="settingsGrid">
             <p style="color:var(--muted);font-size:13px">Loading…</p>
           </div>
-          <button class="btn-secondary" id="saveSettingsBtn" onclick="Game.saveSettings()" style="display:none;margin-top:12px">Save Settings</button>
+          <button class="btn-secondary" id="saveSettingsBtn" onclick="Game.saveSettings()" style="display:none;margin-top:12px;width:100%">💾 Save Settings</button>
         </div>
       </div>
     </div>
@@ -112,7 +128,7 @@
       <div id="meetingChat" class="meeting-chat"></div>
       <div class="meeting-chat-input">
         <input type="text" id="meetingChatInput" placeholder="Say something…" maxlength="100"
-               onkeydown="if(event.key==='Enter') Game.sendChat()">
+               onkeydown="if(event.key==='Enter')Game.sendChat()">
         <button onclick="Game.sendChat()">Send</button>
       </div>
     </div>
@@ -122,20 +138,13 @@
     <div class="end-bg">
       <div id="endTitle"  class="end-title"></div>
       <div id="endRoles"  class="end-roles"></div>
-      <button class="btn-primary" onclick="UI.showMenu()">Main Menu</button>
+      <button class="btn-primary" onclick="UI.showMenu()" style="width:200px">Main Menu</button>
     </div>
   </div>
 
 </div>
-
 <div id="toast" class="toast hidden"></div>
-
-<!-- Game scripts -->
-<script src="js/config.js"></script>
-<script src="js/map.js"></script>
-<script src="js/api.js"></script>
-<script src="js/game.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>
+EOF
+echo "done"
