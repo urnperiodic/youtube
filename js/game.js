@@ -26,7 +26,6 @@ const Game = {
   _genId() { return 'p_' + Math.random().toString(36).substr(2, 9); },
 
   // ---- CREATE ----
-
   async createRoom() {
     const name = document.getElementById('playerName').value.trim() || 'Player';
     this.playerId   = this._genId();
@@ -44,20 +43,18 @@ const Game = {
       document.getElementById('createSpinner').style.display = 'none';
       setTimeout(() => {
         UI.showScreen('screen-lobby');
-        // Set code immediately — don't wait for listener
-        document.getElementById('lobbyCode').textContent = code;
-        document.getElementById('startBtn').style.display = 'block';
-        document.getElementById('waitMsg').style.display  = 'none';
+        document.getElementById('lobbyCode').textContent    = code;
+        document.getElementById('startBtn').style.display  = 'block';
+        document.getElementById('waitMsg').style.display   = 'none';
         this._attachListeners();
       }, 1000);
     } catch (e) {
-      UI.toast('Failed to create room: ' + e.message, 'error');
+      UI.toast('Failed: ' + e.message, 'error');
       UI.showScreen('screen-menu');
     }
   },
 
   // ---- JOIN ----
-
   async joinRoom() {
     const code = document.getElementById('joinCode').value.trim().toUpperCase();
     const name = document.getElementById('playerName').value.trim() || 'Player';
@@ -72,10 +69,9 @@ const Game = {
       const data = await API.joinRoom(code, this.playerId, name);
       this.isHost = data.isHost;
       UI.showScreen('screen-lobby');
-      // Set code immediately — don't wait for listener
-      document.getElementById('lobbyCode').textContent = code;
-      document.getElementById('startBtn').style.display = this.isHost ? 'block' : 'none';
-      document.getElementById('waitMsg').style.display  = this.isHost ? 'none'  : 'block';
+      document.getElementById('lobbyCode').textContent   = code;
+      document.getElementById('startBtn').style.display  = this.isHost ? 'block' : 'none';
+      document.getElementById('waitMsg').style.display   = this.isHost ? 'none' : 'block';
       this._attachListeners();
     } catch (e) {
       UI.toast(e.message, 'error');
@@ -83,23 +79,17 @@ const Game = {
   },
 
   // ---- LISTENERS ----
-
   _attachListeners() {
-    // Room listener — fires instantly on connect, then on every change
     const offRoom = API.listenRoom(this.code, room => {
       const prevPhase = this.room?.phase;
       this.room = room;
-
-      // Always update lobby code + settings as soon as room data arrives
       if (room.phase === 'lobby') {
         document.getElementById('lobbyCode').textContent = this.code;
         UI.updateLobby(this._buildViewState());
       }
-
       this._onRoomChange(prevPhase, room);
     });
 
-    // Players listener
     const offPlayers = API.listenPlayers(this.code, players => {
       this.players = players;
       this._refreshMyPlayer();
@@ -107,7 +97,6 @@ const Game = {
       if (this.room?.phase === 'lobby') UI.updateLobby(this._buildViewState());
     });
 
-    // Chat listener
     const offChat = API.listenChat(this.code, msgs => {
       this.chat = msgs;
       if (this.room?.phase === 'meeting') UI.updateChatOnly(msgs);
@@ -124,16 +113,11 @@ const Game = {
 
   _onRoomChange(prevPhase, room) {
     const phase = room.phase;
-
     if (phase === 'game') UI.updateSabotageAlert(room.state?.sabotage);
-
-    // Same phase — already handled above / in player listener
     if (prevPhase === phase) {
       if (phase === 'meeting') UI.updateMeeting(this._buildViewState());
       return;
     }
-
-    // Phase transition
     if (phase === 'game' && prevPhase === 'lobby') {
       UI.showScreen('screen-game');
       this._startGameLoop();
@@ -159,11 +143,10 @@ const Game = {
   _buildViewState() {
     const playerArr = Object.values(this.players).map((p, i) => {
       if (p.status === 'ghost' && this.myStatus === 'alive' && this.myRole !== 'impostor' && p.id !== this.playerId) {
-        return { ...p, x: -9999, y: -9999, visible: false, isGhost: true };
+        return { ...p, x: -9999, y: -9999, visible: false };
       }
       return { ...p, visible: true };
     });
-
     return {
       code:     this.code,
       hostId:   this.room?.hostId,
@@ -178,7 +161,6 @@ const Game = {
   },
 
   // ---- GAME LOOP ----
-
   _startGameLoop() {
     UI.updateHUD(this._buildViewState());
     this._setupInput();
@@ -196,6 +178,7 @@ const Game = {
       if (e.code === 'KeyE') this.tryInteract();
       if (e.code === 'KeyQ') this.tryKill();
       if (e.code === 'KeyR') this.tryReport();
+      if (e.code === 'KeyF') this.tryKill(); // alternate kill key
     };
     window.onkeyup = e => { this.keys[e.code] = false; };
 
@@ -203,11 +186,19 @@ const Game = {
     if (!canvas._listenerSet) {
       canvas._listenerSet = true;
       canvas.addEventListener('click', e => {
+        // Check kill button click first
+        if (Renderer.isKillBtnClick(e.clientX, e.clientY)) {
+          this.tryKill();
+          return;
+        }
+        // Otherwise world interact
         const pos = Renderer.screenToWorld(e.clientX, e.clientY);
         this.tryInteractAt(pos.x, pos.y);
       });
     }
     Renderer.init(canvas);
+    // Centre camera on spawn
+    if (this.myPlayer) Renderer.centerOn(this.myPlayer.x, this.myPlayer.y);
   },
 
   _handleInput() {
@@ -227,8 +218,10 @@ const Game = {
       const ny = Math.max(50, Math.min(MAP.HEIGHT - 50, this.myPlayer.y + dy));
       this.myPlayer.x = nx;
       this.myPlayer.y = ny;
-      this.players[this.playerId].x = nx;
-      this.players[this.playerId].y = ny;
+      if (this.players[this.playerId]) {
+        this.players[this.playerId].x = nx;
+        this.players[this.playerId].y = ny;
+      }
       Renderer.centerOn(nx, ny);
 
       const now = Date.now();
@@ -249,18 +242,21 @@ const Game = {
 
     const bodies = Object.values(vs.state.bodies || {}).filter(b => !b.reportedBy);
     Renderer.drawBodies(bodies);
-
     Renderer.drawPlayers(vs.players, this.playerId, this.myRole, this.myStatus);
 
     if (this.myStatus !== 'ghost') Renderer.drawVisionOverlay(this.myPlayer, vs);
     Renderer.drawSabotageOverlay(vs);
+
+    // Kill button on canvas (impostor only)
+    if (this.myRole === 'impostor' && this.myStatus === 'alive') {
+      Renderer.drawKillButton(this.myPlayer, this.players, vs.settings);
+    }
 
     const tasks = Object.values(this.myPlayer?.tasks || {});
     Renderer.drawHUD(vs, this.myPlayer, tasks.length, tasks.filter(t => t.done).length);
   },
 
   // ---- INTERACTIONS ----
-
   updateActionButton() {
     const btn     = document.getElementById('actionBtn');
     const nearest = this.findNearestInteractable();
@@ -275,10 +271,11 @@ const Game = {
 
   findNearestInteractable() {
     if (!this.myPlayer) return null;
-    const mx = this.myPlayer.x, my = this.myPlayer.y;
-    const r  = CONFIG.INTERACT_RADIUS;
+    const mx    = this.myPlayer.x, my = this.myPlayer.y;
+    const r     = CONFIG.INTERACT_RADIUS;
     const state = this.room?.state || {};
 
+    // Tasks
     const myTasks = Object.values(this.myPlayer.tasks || {});
     for (const mapTask of MAP.TASKS) {
       const t = myTasks.find(mt => mt.room === mapTask.room && mt.type === mapTask.type && !mt.done);
@@ -287,20 +284,22 @@ const Game = {
         return { label: `[E] ${mapTask.type}`, action: () => this.doTask(t.id) };
     }
 
+    // Bodies
     for (const body of Object.values(state.bodies || {})) {
       if (!body.reportedBy && Math.hypot(mx - body.x, my - body.y) < r)
         return { label: '[E] Report Body', action: () => this.report(body.id) };
     }
 
+    // Emergency button
     const eb = MAP.EMERGENCY_BTN;
     if (Math.hypot(mx - eb.x, my - eb.y) < r)
       return { label: '[E] Emergency Meeting', action: () => this.callMeeting() };
 
+    // Sabotage fix
     if (state.sabotage) {
       const fixes = MAP.SABOTAGE_FIX[state.sabotage.type] || [];
       for (const fix of fixes) {
-        const alreadyFixed = state.sabotage.fixedBy?.[this.playerId];
-        if (!alreadyFixed && Math.hypot(mx - fix.x, my - fix.y) < r)
+        if (!state.sabotage.fixedBy?.[this.playerId] && Math.hypot(mx - fix.x, my - fix.y) < r)
           return { label: `[E] Fix ${state.sabotage.type.toUpperCase()}`, action: () => this.fix() };
       }
     }
@@ -336,36 +335,53 @@ const Game = {
     }
   },
 
+  // ---- KILL (fixed) ----
   tryKill() {
     if (this.myRole !== 'impostor' || this.myStatus !== 'alive') return;
-    const mx = this.myPlayer.x, my = this.myPlayer.y;
-    const cd = (this.room?.settings?.killCooldown || 25) * 1000;
-    if (Date.now() - this.lastKillTs < cd) { UI.toast('Kill on cooldown!', 'warning'); return; }
+    const mx  = this.myPlayer.x;
+    const my  = this.myPlayer.y;
+    const cd  = (this.room?.settings?.killCooldown || 25) * 1000;
+    const now = Date.now();
 
-    const target = Object.values(this.players).find(p =>
-      p.id !== this.playerId && p.role === 'crewmate' && p.status === 'alive' &&
-      Math.hypot(mx - p.x, my - p.y) < CONFIG.KILL_RADIUS
-    );
-    if (!target) { UI.toast('No one in range', 'warning'); return; }
+    if (now - this.lastKillTs < cd) {
+      const rem = Math.ceil((cd - (now - this.lastKillTs)) / 1000);
+      UI.toast(`Kill cooldown: ${rem}s`, 'warning');
+      return;
+    }
 
-    this.lastKillTs = Date.now();
-    API.kill(this.code, this.playerId, target.id, target.x, target.y)
-      .then(() => UI.toast(`Killed ${target.name}`, 'success'))
+    // Find nearest alive crewmate in range
+    let nearest = null, nearestDist = CONFIG.KILL_RADIUS;
+    for (const p of Object.values(this.players)) {
+      if (p.id === this.playerId) continue;
+      if (p.role !== 'crewmate')  continue;
+      if (p.status !== 'alive')   continue;
+      const d = Math.hypot(mx - p.x, my - p.y);
+      if (d < nearestDist) { nearestDist = d; nearest = p; }
+    }
+
+    if (!nearest) {
+      UI.toast('No crewmate in range', 'warning');
+      return;
+    }
+
+    this.lastKillTs = now;
+    API.kill(this.code, this.playerId, nearest.id, nearest.x, nearest.y)
+      .then(() => UI.toast(`💀 Killed ${nearest.name}`, 'success'))
       .catch(e => UI.toast(e.message, 'error'));
   },
 
   tryReport() {
     const mx = this.myPlayer?.x, my = this.myPlayer?.y;
-    if (!mx) return;
+    if (mx == null) return;
     for (const body of Object.values(this.room?.state?.bodies || {})) {
       if (!body.reportedBy && Math.hypot(mx - body.x, my - body.y) < CONFIG.INTERACT_RADIUS) {
         this.report(body.id); return;
       }
     }
+    UI.toast('No body nearby', 'warning');
   },
 
   // ---- ACTIONS ----
-
   doTask(taskId) { UI.showTaskPanel(taskId, this.myPlayer); },
 
   async finishTask(taskId) {
