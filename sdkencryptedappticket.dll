@@ -1,0 +1,304 @@
+{
+    "goals": [
+        {
+            "name": "FreePlayStart",
+            "title": "",
+            "text": "",
+            "quickText": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "planning": [],
+            "unlocks": []
+        }
+    ],
+    "startGoal": "FreePlayStart",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": 0,
+                "y": 160,
+                "width": 400,
+                "height": 52
+            },
+            "seed": 2101,
+            "worldResources": [
+                {"position": 0, "className": "Forest"},
+                {"position": 4, "className": "Forest"},
+                {"position": 8, "className": "BranchyForest"},
+                {"position": 9, "className": "Forest"},
+                {"position": 10, "className": "Rock"},
+                {"position": 11, "className": "Rock"},
+                {"position": 12, "className": "Forest"},
+                {"position": 13, "className": "BranchyForest"},
+                {"position": 16, "className": "Forest"},
+                {"position": 18, "className": "BranchyForest"},
+                {"position": 19, "className": "Forest"}
+            ],
+            "decorations": [
+                { "position": 6, "spriteName": "spr_flowers" },
+                { "position": 17, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["ComfortableHouse", "ComfortableHouse", "RooftopDecoration*false.3"] },
+                { "position": 2, "classNames": ["ComfortableHouse", "Pub", "ComfortableHouse", "RooftopDecoration2*false.3"] },
+                { "position": 3, "classNames": ["ComfortableHouse", "ComfortableHouse", "RooftopDecoration*true.3"] }
+            ],
+            "citizens": [
+                { "amount": 3, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 60, "maxX": 80 }
+            ]
+        },
+        {
+            "rect": {
+                "x": -320,
+                "y": 80,
+                "width": 300,
+                "height": 60
+            },
+            "worldResources": [
+                {"position": 2, "className": "PurpleForest"},
+                {"position": 3, "className": "Rock"},
+                {"position": 6, "className": "PurpleForest"},
+                {"position": 8, "className": "Rock"},
+                {"position": 9, "className": "PurpleForest"},
+                {"position": 10, "className": "PurpleForest"},
+                {"position": 11, "className": "PurpleForest"},
+                {"position": 13, "className": "PurpleForest"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_purplegrass",
+            "seed": 2102,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 360,
+                "y": 220,
+                "width": 400,
+                "height": 50
+            },
+            "worldResources": [
+                {"position": 2, "className": "RedForest"},
+                {"position": 3, "className": "RedForest"},
+                {"position": 6, "className": "RedForest"},
+                {"position": 7, "className": "RedForest"},
+                {"position": 12, "className": "RedForest"},
+                {"position": 14, "className": "RedForest"},
+                {"position": 15, "className": "RedForest"},
+                {"position": 17, "className": "RedForest"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_redgrass",
+            "seed": 2103,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 500,
+                "y": 40,
+                "width": 400,
+                "height": 60
+            },
+            "worldResources": [
+                {"position": 0, "className": "PurpleForest"},
+                {"position": 2, "className": "PurpleForest"},
+                {"position": 3, "className": "PurpleForest"},
+                {"position": 6, "className": "PurpleForest"},
+                {"position": 7, "className": "PurpleForest"},
+                {"position": 10, "className": "PurpleForest"},
+                {"position": 14, "className": "PurpleForest"},
+                {"position": 15, "className": "PurpleForest"},
+                {"position": 17, "className": "Rock"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_purplegrass",
+            "seed": 2104,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -500,
+                "y": 160,
+                "width": 200,
+                "height": 52
+            },
+            "seed": 2105,
+            "worldResources": [
+                {"position": 0, "className": "BranchyForest"},
+                {"position": 3, "className": "Forest"},
+                {"position": 5, "className": "BranchyForest"},
+                {"position": 8, "className": "BranchyForest"},
+                {"position": 9, "className": "Forest"}
+            ],
+            "decorations": [
+                { "position": 1, "spriteName": "spr_flowers" },
+                { "position": 2, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [
+            ],
+            "citizens": [
+            ]
+        },
+        {
+            "rect": {
+                "x": -900,
+                "y": 40,
+                "width": 380,
+                "height": 55
+            },
+            "worldResources": [
+                {"position": 0, "className": "RedForest"},
+                {"position": 3, "className": "RedForest"},
+                {"position": 4, "className": "RedForest"},
+                {"position": 8, "className": "RedForest"},
+                {"position": 10, "className": "RedForest"},
+                {"position": 12, "className": "RedForest"},
+                {"position": 15, "className": "RedForest"},
+                {"position": 16, "className": "RedForest"},
+                {"position": 11, "className": "Boulder"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_redgrass",
+            "seed": 2106,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -120,
+                "y": 340,
+                "width": 440,
+                "height": 68
+            },
+            "seed": 2107,
+            "worldResources": [
+                {"position": 2, "className": "Forest"},
+                {"position": 4, "className": "BranchyForest"},
+                {"position": 7, "className": "Forest"},
+                {"position": 8, "className": "Forest"},
+                {"position": 9, "className": "BranchyForest"},
+                {"position": 14, "className": "Rock"},
+                {"position": 15, "className": "BranchyForest"},
+                {"position": 16, "className": "Rock"},
+                {"position": 19, "className": "Forest"},
+                {"position": 20, "className": "PineForest"},
+                {"position": 21, "className": "Forest"}
+            ],
+            "decorations": [
+                { "position": 5, "spriteName": "spr_flowers" },
+                { "position": 18, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [
+            ],
+            "citizens": [
+            ]
+        },
+        {
+            "rect": {
+                "x": -700,
+                "y": 300,
+                "width": 240,
+                "height": 42
+            },
+            "worldResources": [
+                {"position": 0, "className": "PurpleForest"},
+                {"position": 1, "className": "PurpleForest"},
+                {"position": 4, "className": "PurpleForest"},
+                {"position": 5, "className": "PurpleForest"},
+                {"position": 8, "className": "PurpleForest"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_purplegrass",
+            "seed": 2108,
+            "citizens": []
+        }
+    ],
+    "initialMaterials": {
+        "food": 100,
+        "stone": 20,
+        "wood": 20,
+        "knowledge": 0,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "isFreePlay": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 1,
+            "x": -630,
+            "y": -300,
+            "velocity": 1.2
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 5,
+            "x": 450,
+            "y": -100,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 2,
+            "x": 0,
+            "y": -800,
+            "velocity": 0.18
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 2,
+            "x": 200,
+            "y": -230,
+            "velocity": 1.1
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 3,
+            "x": -140,
+            "y": -100,
+            "velocity": 1.9
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 5,
+            "x": 1000,
+            "y": -500,
+            "velocity": -1.01
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 4,
+            "x": -900,
+            "y": 780,
+            "velocity": 0.4
+        }
+    ]
+}

@@ -1,0 +1,434 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "nextGoal": "MorePeople",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "WoodcuttingCentre",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "StoneMine",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "IndoorFarm",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "NormalHouse",
+                    "amount": 1
+                }
+            ],
+            "tempLocks": [
+                "customHouses", "ModernRusticHome", "ComfortableHouse"
+            ]
+        },
+        {
+            "name": "MorePeople",
+            "nextGoal": "GoBuildMPF",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "Pub",
+                    "amount": 1
+                }
+            ],
+            "planning": [
+                {
+                    "type": "ScriptedStoryPart",
+                    "className": "SpawnCitizensRegularly",
+                    "spawnNumber": 70,
+                    "time": 0,
+                    "groupSizeMin": 3,
+                    "groupSizeMax": 4,
+                    "ageRangeMin": 18,
+                    "ageRangeMax": 40,
+                    "world": 0,
+                    "timeBetweenMin": 30,
+                    "timeBetweenMax": 34,
+                    "afterDoneMessage": "All the people from your previous city have now arrived. Of course, your population can still grow through their offspring."
+                }
+            ],
+            "unlocks": [
+                "customHouses", "ModernRusticHome", "ComfortableHouse"
+            ]
+        },
+        {
+            "name": "GoBuildMPF",
+            "nextGoal": "MachinePartsFactoryBuilt",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "MachinePartsFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MachinePartsFactoryBuilt",
+            "nextGoal": "GoToOtherWorlds",
+            "subGoals": [
+                {
+                    "type": "PerformBuildingUpgrades",
+                    "upgradeClass": "MachinePartsFactoryEfficiency",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "GoToOtherWorlds",
+            "nextGoal": "GoToOtherWorldsDone",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "LandingSite",
+                    "amount": 1,
+                    "onWorld": 0
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "LandingSite",
+                    "amount": 1,
+                    "notOnWorld": 0
+                }
+            ]
+        },
+        {
+            "name": "GoToOtherWorldsDone",
+            "nextGoal": "GoBuildRefinedMetalFactory",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ExperimentalFarm",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "GoBuildRefinedMetalFactory",
+            "nextGoal": "GetHighHappiness",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "RefinedMetalFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "GetHighHappiness",
+            "nextGoal": "Win",
+            "subGoals": [
+                {
+                    "type": "MinimumHappiness",
+                    "happiness": 80
+                }
+            ]
+        },
+        {
+            "name": "Win",
+            "nextGoal": "",
+            "nextStory": "hackersandaliens",
+            "subGoals": [],
+            "flags": {
+                "unlockAchievementWithStoryPrefix": "MULTIPLE_WORLDS_WIN"
+            }
+        }
+    ],
+    "startGoal": "Start",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": -20,
+                "y": 160,
+                "width": 220,
+                "height": 80
+            },
+            "seed": 2000,
+            "worldResources": [
+                {
+                    "position": 3,
+                    "className": "Forest"
+                },
+                {
+                    "position": 6,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "Forest"
+                },
+                {
+                    "position": 8,
+                    "className": "Rock"
+                },
+                {
+                    "position": 9,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 10,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [
+                {
+                    "position": 2,
+                    "classNames": [
+                        "LandedExplorationShip"
+                    ]
+                }
+            ],
+            "citizens": [
+                {
+                    "amount": 3,
+                    "ageRangeMin": 20,
+                    "ageRangeMax": 25,
+                    "minX": 60,
+                    "maxX": 80
+                }
+            ]
+        },
+        {
+            "rect": {
+                "x": 240,
+                "y": 140,
+                "width": 180,
+                "height": 100
+            },
+            "seed": 2001,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "Rock"
+                },
+                {
+                    "position": 2,
+                    "className": "Forest"
+                },
+                {
+                    "position": 4,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 7,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -160,
+                "y": 120,
+                "width": 120,
+                "height": 60
+            },
+            "seed": 2002,
+            "worldResources": [
+                {
+                    "position": 2,
+                    "className": "Forest"
+                },
+                {
+                    "position": 3,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 420,
+                "y": 40,
+                "width": 180,
+                "height": 80
+            },
+            "seed": 2003,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Forest"
+                },
+                {
+                    "position": 2,
+                    "className": "Rock"
+                },
+                {
+                    "position": 3,
+                    "className": "Forest"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "Forest"
+                },
+                {
+                    "position": 8,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 400,
+                "y": 200,
+                "width": 120,
+                "height": 60
+            },
+            "seed": 2004,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Forest"
+                },
+                {
+                    "position": 3,
+                    "className": "Forest"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 640,
+                "y": 100,
+                "width": 220,
+                "height": 100
+            },
+            "seed": 2005,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 1,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "Forest"
+                },
+                {
+                    "position": 6,
+                    "className": "Rock"
+                },
+                {
+                    "position": 8,
+                    "className": "Forest"
+                },
+                {
+                    "position": 10,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -300,
+                "y": 160,
+                "width": 100,
+                "height": 60
+            },
+            "seed": 2006,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "Forest"
+                },
+                {
+                    "position": 2,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 3,
+                    "className": "Forest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        }
+    ],
+    "initialMaterials": {
+        "food": 50,
+        "stone": 5,
+        "wood": 3,
+        "knowledge": 3,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planet_ring_big",
+            "width": 277,
+            "image": 0,
+            "x": 400,
+            "y": -200,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_giant",
+            "width": 140,
+            "image": 1,
+            "x": -400,
+            "y": -500,
+            "velocity": -0.8
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 5,
+            "x": 200,
+            "y": -100,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 3,
+            "x": 950,
+            "y": 50,
+            "velocity": 0.2
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 0,
+            "x": -900,
+            "y": 600,
+            "velocity": 0.8
+        }
+    ]
+}

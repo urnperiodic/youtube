@@ -1,0 +1,210 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "nextGoal": "ChristmasTreesInHouses",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "NormalHouse",
+                    "amount": 3
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "IndoorFarm",
+                    "amount": 2
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "StoneMine",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "WoodcuttingCentre",
+                    "amount": 1
+                }
+            ],
+            "planning": [
+                {
+                    "type": "ScriptedStoryPart",
+                    "className": "SpawnCitizensRegularly",
+                    "spawnNumber": 70,
+                    "time": 0,
+                    "groupSizeMin": 3,
+                    "groupSizeMax": 4,
+                    "ageRangeMin": 18,
+                    "ageRangeMax": 40,
+                    "world": 0,
+                    "timeBetweenMin": 30,
+                    "timeBetweenMax": 34,
+                    "afterDoneMessage": "The people who wanted to move here have now all arrived. Of course, your population can still grow through their offspring."
+                }
+            ]
+        },
+        {
+            "name": "ChristmasTreesInHouses",
+            "nextGoal": "ChristmasMarket",
+            "subGoals": [
+                {
+                    "type": "PerformBuildingUpgrades",
+                    "upgradeClass": "MiniChristmasTree",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["buildingUpgrades.MiniChristmasTree"]
+        },
+        {
+            "name": "ChristmasMarket",
+            "nextGoal": "ChristmasTree",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ChristmasMarket",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["ChristmasMarket"]
+        },
+        {
+            "name": "ChristmasTree",
+            "nextGoal": "Win",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ChristmasTree",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "Win",
+            "nextGoal": "",
+            "subGoals": []
+        }
+    ],
+    "startGoal": "Start",
+    "worlds": [
+        {
+            "rect": {
+                "x": 0,
+                "y": 160,
+                "width": 800,
+                "height": 100
+            },
+            "seed": 11001,
+            "worldResources": [
+                {
+                    "position": 5,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 6,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 10,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 11,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 12,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 16,
+                    "className": "Rock"
+                },
+                {
+                    "position": 18,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 21,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 24,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 26,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 27,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 29,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 32,
+                    "className": "Rock"
+                },
+                {
+                    "position": 34,
+                    "className": "Rock"
+                },
+                {
+                    "position": 37,
+                    "className": "ForestSnow"
+                },
+                {
+                    "position": 38,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [
+                {
+                    "position": 1,
+                    "classNames": [
+                        "LandedExplorationShip_mirrored"
+                    ]
+                },
+                {
+                    "position": 3,
+                    "classNames": [
+                        "LandedExplorationShip"
+                    ]
+                }
+            ],
+            "decorations": [
+                {
+                    "position": 8,
+                    "spriteName": "spr_snowman"
+                }
+            ],
+            "citizens": [
+                {
+                    "amount": 6,
+                    "ageRangeMin": 60,
+                    "ageRangeMax": 64,
+                    "minX": 60,
+                    "maxX": 80
+                }
+            ],
+            "appearance": "snow"
+        }
+    ],
+    "initialMaterials": {
+        "food": 100,
+        "stone": 30,
+        "wood": 30,
+        "knowledge": 0,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "viewYMobi": 220,
+    "mobileViewStartX": 50
+}

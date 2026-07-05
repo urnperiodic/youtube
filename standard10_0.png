@@ -1,0 +1,19 @@
+﻿!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~éÉàÀÂâèÈîçÇôêäÄöÖüÜßẞËëęĘóÓąĄśŚłŁżŻźŹćĆńŃАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяĂăÂâĐđÊêÔôƠơƯư₫ÁáÀàÃãẤấẦầẮắẰằẪẫẴẵẢảẨẩẲẳẠạẬậẶặÉéÈèẼẽẾếỀềỄễẺẻỂểẸẹỆệÍíÌìĨĩỈỉỊịÓóÒòÕõỐốỒồỖỗỎỏỔổỌọỚớỜờỠỡỘộỞởỢợÚúÙùŨũỦủỤụỨứỪừỮữỬửỰựÝýỲỳỸỹỶỷỴỵáâãàçéêèíìóôõòúÁáÉéÍíÑñÓóÚúÜü«»¿¡
+
+French, German, Polish, PT, es, IT
+
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~éÉàÀÂâèÈîçÇôêäÄöÖüÜßẞËëęĘóÓąĄśŚłŁżŻźŹćĆńŃ
+АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя
+ĂăÂâĐđÊêÔôƠơƯư₫ÁáÀàÃãẤấẦầẮắẰằẪẫẴẵẢảẨẩẲẳẠạẬậẶặÉéÈèẼẽẾếỀềỄễẺẻỂểẸẹỆệÍíÌìĨĩỈỉỊịÓóÒòÕõỐốỒồỖỗỎỏỔổỌọỚớỜờỠỡỘộỞởỢợÚúÙùŨũỦủỤụỨứỪừỮữỬửỰựÝýỲỳỸỹỶỷỴỵ
+PT, ES:
+áâãàçéêèíìóôõòúÁáÉéÍíÑñÓóÚúÜü«»¿¡
+
+Arial10 -> 7 pt, lineHeight to 9 in shoebox
+
+Arial -> 8 pt, lineHeight to 10 in shoebox, then manually change to 12
+
+Arial15 -> 9 pt, lineHeight to 13 in shoebox, then manually change to 15
+
+Arial16 -> just do in BMFont instead, load in file, export, then manually change lineHeight to 13
+
+Arial18 -> 12px, lineHeight to 19, kerning to 2

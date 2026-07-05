@@ -1,0 +1,174 @@
+{
+    "goals": [
+        {
+            "name": "FreePlayStart",
+            "title": "",
+            "text": "",
+            "quickText": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "planning": [],
+            "unlocks": []
+        }
+    ],
+    "startGoal": "FreePlayStart",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": 0,
+                "y": 160,
+                "width": 100,
+                "height": 42
+            },
+            "seed": 2101,
+            "worldResources": [
+                {"position": 0, "className": "Forest"},
+                {"position": 4, "className": "Rock"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["ComfortableHouse", "ComfortableHouse", "RooftopDecoration*false.3"] },
+                { "position": 2, "classNames": ["ComfortableHouse", "Pub", "ComfortableHouse", "RooftopDecoration2*false.3"] },
+                { "position": 3, "classNames": ["ComfortableHouse", "ComfortableHouse", "RooftopDecoration*true.3"] }
+            ],
+            "citizens": [
+                { "amount": 3, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 60, "maxX": 80 }
+            ]
+        },
+        {
+            "rect": {
+                "x": -100,
+                "y": 120,
+                "width": 80,
+                "height": 38
+            },
+            "worldResources": [
+                {"position": 1, "className": "Rock"},
+                {"position": 2, "className": "PurpleForest"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_purplegrass",
+            "seed": 2104,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 140,
+                "y": 100,
+                "width": 120,
+                "height": 45
+            },
+            "worldResources": [
+                {"position": 2, "className": "RedForest"},
+                {"position": 3, "className": "RedForest"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+              
+            ],
+            "decoration": "spr_redgrass",
+            "seed": 2103,
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 280,
+                "y": 140,
+                "width": 60,
+                "height": 31
+            },
+            "seed": 2141,
+            "worldResources": [
+                {"position": 1, "className": "PurpleForest"},
+                {"position": 2, "className": "Rock"}
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [
+            ],
+            "decoration": "spr_purplegrass",
+            "citizens": []
+        }
+    ],
+    "initialMaterials": {
+        "food": 100,
+        "stone": 20,
+        "wood": 20,
+        "knowledge": 0,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "isFreePlay": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 1,
+            "x": -630,
+            "y": -300,
+            "velocity": 1.2
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 5,
+            "x": 450,
+            "y": -100,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 2,
+            "x": 0,
+            "y": -800,
+            "velocity": 0.18
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 2,
+            "x": 200,
+            "y": -230,
+            "velocity": 1.1
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 3,
+            "x": -140,
+            "y": -100,
+            "velocity": 1.9
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 5,
+            "x": 1000,
+            "y": -500,
+            "velocity": -1.01
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 4,
+            "x": -900,
+            "y": 780,
+            "velocity": 0.4
+        }
+    ],
+    "rocketScenarios": [
+        {"origScenario": "RocketExploreStrangeForests", "replacementScenario": "RocketExploreStrangeForestsNano"},
+        {"origScenario": "RocketExploreFeather", "replacementScenario": "RocketExploreFeatherNano"},
+        {"origScenario": "RocketExploreRockLand", "replacementScenario": "RocketExploreRockLandNano"}
+    ]
+}

@@ -1,0 +1,629 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "subGoals": [
+                {
+                    "type": "HousingCapacity",
+                    "amount": 50
+                }
+            ],
+            "nextGoal": "ExploreAlienRuins2",
+            "planning": [
+                {
+                    "type": "ScriptedStoryPart",
+                    "className": "SpawnCitizensRegularly",
+                    "spawnNumber": 100,
+                    "time": 0,
+                    "groupSizeMin": 3,
+                    "groupSizeMax": 4,
+                    "ageRangeMin": 18,
+                    "ageRangeMax": 40,
+                    "world": 0,
+                    "timeBetweenMin": 16,
+                    "timeBetweenMax": 24,
+                    "afterDoneMessage": "The people who wanted to move here have now all arrived. Of course, your population can still grow through their offspring."
+                }
+            ]
+        },
+        {
+            "name": "ExploreAlienRuins",
+            "nextGoal": "BuildRefinedMetalsFactory",
+            "subGoals": [
+                {
+                    "type": "ExploreAlienRuins"
+                }
+            ]
+        },
+        {
+            "name": "ExploreAlienRuins2",
+            "nextGoal": "InTheMeantime2",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ResearchBot",
+                    "amount": 1
+                }
+            ],
+            "unlocks": [
+                "ResearchBot"
+            ]
+        },
+        {
+            "name": "InTheMeantime2",
+            "nextGoal": "InTheMeantime3",
+            "subGoals": [
+                {
+                    "type": "ExploredWithResearchSpacecraft"
+                }
+            ]
+        },
+        {
+            "name": "InTheMeantime3",
+            "nextGoal": "BuildRefinedMetalsFactory",
+            "subGoals": [
+                {
+                    "type": "ExploreAlienRuins"
+                }
+            ]
+        },
+        {
+            "name": "BuildRefinedMetalsFactory",
+            "nextGoal": "BuildComputerResearchCenter",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "RefinedMetalFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "BuildComputerResearchCenter",
+            "nextGoal": "BuildComputerChipFactory",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ComputerResearchCenter",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "BuildComputerChipFactory",
+            "nextGoal": "BuildArcades",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ComputerChipFactory",
+                    "amount": 1
+                },
+                {
+                    "type": "GatherMaterials",
+                    "materials": {
+                        "computerChips": 5
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BuildArcades",
+            "nextGoal": "BuildHackers",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "Arcade",
+                    "amount": 3
+                }
+            ]
+        },
+        {
+            "name": "BuildHackers",
+            "nextGoal": "CompleteHackerMissions",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "HackerHQ",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "CompleteHackerMissions",
+            "nextGoal": "BuildDecryptBuilding",
+            "subGoals": [
+                {
+                    "type": "CompleteHackerMissions",
+                    "amount": 4
+                }
+            ]
+        },
+        {
+            "name": "BuildDecryptBuilding",
+            "nextGoal": "Wait",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "AlienDecryptor",
+                    "amount": 1
+                }
+            ],
+            "unlocks": [
+                "AlienDecryptor"
+            ]
+        },
+        {
+            "name": "Wait",
+            "nextGoal": "Win",
+            "subGoals": [
+                {
+                    "type": "WaitForDecryption"
+                }
+            ]
+        },
+        {
+            "name": "Win",
+            "nextGoal": "",
+            "nextStory": "cityofthekey",
+            "subGoals": [],
+            "flags": {
+                "setBuildableAliens": true,
+                "unlockAchievementWithStoryPrefix": "HACKERSANDALIENS_WIN"
+            }
+        }
+    ],
+    "startGoal": "Start",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": -20,
+                "y": 160,
+                "width": 400,
+                "height": 80
+            },
+            "seed": 3000,
+            "worldResources": [
+                {
+                    "position": 7,
+                    "className": "Forest"
+                },
+                {
+                    "position": 8,
+                    "className": "Rock"
+                },
+                {
+                    "position": 9,
+                    "className": "Forest"
+                },
+                {
+                    "position": 12,
+                    "className": "Rock"
+                },
+                {
+                    "position": 13,
+                    "className": "ComputerAlienRuins"
+                },
+                {
+                    "position": 14,
+                    "className": "Rock"
+                },
+                {
+                    "position": 15,
+                    "className": "Forest"
+                }
+            ],
+            "buildingStacks": [
+                {
+                    "position": 2,
+                    "classNames": [
+                        "StoneMine",
+                        "NormalHouse",
+                        "LandedExplorationShip_mirrored"
+                    ]
+                },
+                {
+                    "position": 3,
+                    "classNames": [
+                        "IndoorFarm",
+                        "NormalHouse",
+                        "NormalHouse",
+                        "RooftopDecoration2*false.1"
+                    ]
+                },
+                {
+                    "position": 4,
+                    "classNames": [
+                        "WoodcuttingCentre",
+                        "NormalHouse",
+                        "LandedExplorationShip"
+                    ]
+                }
+            ],
+            "citizens": [
+                {
+                    "amount": 20,
+                    "ageRangeMin": 20,
+                    "ageRangeMax": 25,
+                    "minX": 40,
+                    "maxX": 100
+                }
+            ]
+        },
+        {
+            "rect": {
+                "x": -300,
+                "y": 300,
+                "width": 400,
+                "height": 60
+            },
+            "seed": 3001,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Forest"
+                },
+                {
+                    "position": 3,
+                    "className": "Forest"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                },
+                {
+                    "position": 6,
+                    "className": "Forest"
+                },
+                {
+                    "position": 10,
+                    "className": "Rock"
+                },
+                {
+                    "position": 11,
+                    "className": "Rock"
+                },
+                {
+                    "position": 16,
+                    "className": "Forest"
+                },
+                {
+                    "position": 17,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 320,
+                "y": 320,
+                "width": 340,
+                "height": 60
+            },
+            "seed": 3002,
+            "worldResources": [
+                {
+                    "position": 2,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "Forest"
+                },
+                {
+                    "position": 6,
+                    "className": "Rock"
+                },
+                {
+                    "position": 10,
+                    "className": "Forest"
+                },
+                {
+                    "position": 13,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -400,
+                "y": -40,
+                "width": 280,
+                "height": 60
+            },
+            "seed": 3003,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 9,
+                    "className": "Rock"
+                },
+                {
+                    "position": 12,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": 500,
+                "y": -20,
+                "width": 320,
+                "height": 60
+            },
+            "seed": 3004,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Forest"
+                },
+                {
+                    "position": 1,
+                    "className": "Rock"
+                },
+                {
+                    "position": 3,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 10,
+                    "className": "Rock"
+                },
+                {
+                    "position": 13,
+                    "className": "Forest"
+                },
+                {
+                    "position": 15,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": 440,
+                "y": 100,
+                "width": 40,
+                "height": 20
+            },
+            "seed": 3005,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "AlienRuins"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": -740,
+                "y": 180,
+                "width": 420,
+                "height": 60
+            },
+            "seed": 3006,
+            "worldResources": [
+                {
+                    "position": 3,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 0,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                },
+                {
+                    "position": 6,
+                    "className": "Forest"
+                },
+                {
+                    "position": 7,
+                    "className": "Forest"
+                },
+                {
+                    "position": 11,
+                    "className": "Rock"
+                },
+                {
+                    "position": 13,
+                    "className": "Forest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": 720,
+                "y": 200,
+                "width": 360,
+                "height": 80
+            },
+            "seed": 3007,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "Forest"
+                },
+                {
+                    "position": 3,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "Rock"
+                },
+                {
+                    "position": 9,
+                    "className": "Forest"
+                },
+                {
+                    "position": 12,
+                    "className": "Forest"
+                },
+                {
+                    "position": 15,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": -100,
+                "y": 500,
+                "width": 500,
+                "height": 80
+            },
+            "seed": 3008,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Forest"
+                },
+                {
+                    "position": 3,
+                    "className": "Rock"
+                },
+                {
+                    "position": 7,
+                    "className": "Forest"
+                },
+                {
+                    "position": 8,
+                    "className": "Forest"
+                },
+                {
+                    "position": 12,
+                    "className": "Rock"
+                },
+                {
+                    "position": 15,
+                    "className": "Forest"
+                },
+                {
+                    "position": 16,
+                    "className": "Rock"
+                },
+                {
+                    "position": 20,
+                    "className": "Rock"
+                },
+                {
+                    "position": 21,
+                    "className": "Rock"
+                },
+                {
+                    "position": 22,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        },
+        {
+            "rect": {
+                "x": -780,
+                "y": 180,
+                "width": 20,
+                "height": 20
+            },
+            "seed": 3009,
+            "worldResources": [],
+            "buildingStacks": [],
+            "citizens": [],
+            "unbuildableAliens": true
+        }
+    ],
+    "initialMaterials": {
+        "food": 150,
+        "stone": 10,
+        "wood": 10,
+        "knowledge": 25,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 3,
+            "x": -400,
+            "y": -300,
+            "velocity": 0.6
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 0,
+            "x": 300,
+            "y": -50,
+            "velocity": 0.6
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 1,
+            "x": -50,
+            "y": -200,
+            "velocity": -0.5
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 1,
+            "x": -50,
+            "y": 600,
+            "velocity": 0.9
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 2,
+            "x": -600,
+            "y": 0,
+            "velocity": 0.7
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 4,
+            "x": 1100,
+            "y": -500,
+            "velocity": -0.4
+        }
+    ]
+}

@@ -1,0 +1,568 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "nextGoal": "EcoFarmUpgrade",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "TreePlantation",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "EcoFarm",
+                    "amount": 1
+                },
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "StoneMine",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["EcoFarm", "CozyHouse", "cityUpgrades.CozyLiving", "BlossomHippieHQ"],
+            "researches": ["EcoFarm", "BlossomHippieHQ"],
+            "planning": [
+                {
+                    "type": "ScriptedStoryPart",
+                    "className": "SpawnCitizensRegularly",
+                    "spawnNumber": 120,
+                    "time": 20,
+                    "groupSizeMin": 2,
+                    "groupSizeMax": 3,
+                    "ageRangeMin": 18,
+                    "ageRangeMax": 35,
+                    "world": 0,
+                    "timeBetweenMin": 24,
+                    "timeBetweenMax": 30,
+                    "afterDoneMessage": "The people who wanted to move here have now all arrived. Of course, your population can still grow through their offspring."
+                }
+            ],
+            "flags": {
+                "ruleset": "HippieCity",
+                "disableRocket": true
+            }
+        },
+        {
+            "name": "EcoFarmUpgrade",
+            "nextGoal": "Pioneers",
+            "subGoals": [
+                {
+                    "type": "SetBuildingMode",
+                    "upgradeClass": "EcoFarmPruning",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["buildingUpgrades.EcoFarmNormal", "buildingUpgrades.EcoFarmPruning"]
+        },
+        {
+            "name": "Pioneers",
+            "nextGoal": "Houses",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "PioneersHut",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "Houses",
+            "nextGoal": "HippieSchool",
+            "subGoals": [
+                {
+                    "type": "HousingCapacityEnough"
+                }
+            ]
+        },
+        {
+            "name": "HippieSchool",
+            "nextGoal": "GrowTheCity",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "HippieSchool",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["HippieSchool"],
+            "researches": ["HippieSchool"]
+        },
+        {
+            "name": "GrowTheCity",
+            "nextGoal": "Volunteers",
+            "subGoals": [
+                {
+                    "type": "MinimumCitizens",
+                    "number": 100
+                }
+            ]
+        },
+        {
+            "name": "Volunteers",
+            "nextGoal": "LabsNextToEcoFarms",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "VolunteersCenter",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["VolunteersCenter"],
+            "researches": ["VolunteersCenter"]
+        },
+        {
+            "name": "LabsNextToEcoFarms",
+            "nextGoal": "RefinedMetals",
+            "subGoals": [
+                {
+                    "type": "BuildUpgradedLabsNextToEcoFarms"
+                }
+            ]
+        },
+        {
+            "name": "RefinedMetals",
+            "nextGoal": "OneWithNature",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "RefinedMetalFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "OneWithNature",
+            "nextGoal": "BuildCommunityHouses",
+            "subGoals": [
+                {
+                    "type": "OneWithNatureGoal"
+                }
+            ]
+        },
+        {
+            "name": "BuildCommunityHouses",
+            "nextGoal": "BuildBlossomRestaurants",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "FarmHouse",
+                    "amount": 7
+                }
+            ],
+            "unlocks": ["FarmHouse"]
+        },
+        {
+            "name": "BuildBlossomRestaurants",
+            "nextGoal": "ChooseYourFaction",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "BlossomRestaurant",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["BlossomRestaurant"]
+        },
+        {
+            "name": "ChooseYourFaction",
+            "options": [
+                {
+                    "nextGoal": "BuildFarmByProductProcessors",
+                    "subGoals": [
+                        {
+                            "type": "BuildPermanents",
+                            "permanentToBuildClass": "CommuneHall",
+                            "amount": 1
+                        }
+                    ]
+                },
+                {
+                    "nextGoal": "UpscaleRestaurants",
+                    "subGoals": [
+                        {
+                            "type": "BuildPermanents",
+                            "permanentToBuildClass": "SecretSocietyHouse",
+                            "amount": 1
+                        }
+                    ]
+                }
+            ],
+            "unlocks": ["SecretSocietyHouse", "CommuneHall"]
+        },
+        {
+            "name": "BuildFarmByProductProcessors",
+            "nextGoal": "SuperSpaciousLiving",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "FarmByProductProcessor",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["FarmByProductProcessor"],
+            "flags": {
+                "ruleset": "HippieCity",
+                "disableRocket": false
+            }
+        },
+        {
+            "name": "SuperSpaciousLiving",
+            "nextGoal": "BuildFestivalHQ",
+            "subGoals": [
+                {
+                    "type": "PerformCityUpgrade",
+                    "upgradeClass": "SuperSpaciousLiving"
+                }
+            ],
+            "unlocks": ["cityUpgrades.SuperSpaciousLiving"]
+        },
+        {
+            "name": "BuildFestivalHQ",
+            "nextGoal": "OrganizeAFestival",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "FestivalHQ",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["FestivalHQ"]
+        },
+        {
+            "name": "OrganizeAFestival",
+            "nextGoal": "Win",
+            "subGoals": [
+                {
+                    "type": "OrganizeFestival"
+                }
+            ],
+            "unlocks": []
+        },
+        {
+            "name": "Win",
+            "nextStory": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "unlocks": [],
+            "flags": {"unlockAchievementWithStoryPrefix": "HIPPIECOMMUNE_WIN"}
+        },
+        {
+            "name": "UpscaleRestaurants",
+            "nextGoal": "CompleteSecretSocietyTasks",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "LuxuryRestaurant",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["WoodcuttingCentre", "School", "IndoorFarm", "LuxuryRestaurant"],
+            "tempLocks": ["CommuneHall"],
+            "flags": {
+                "ruleset": "KeyCity",
+                "betrayedHippies": true,
+                "disableRocket": false
+            }
+        },
+        {
+            "name": "CompleteSecretSocietyTasks",
+            "nextGoal": "KeyGlory",
+            "subGoals": [
+                {
+                    "type": "CompleteSecretSocietyMissions",
+                    "amount": 8
+                }
+            ]
+        },
+        {
+            "name": "KeyGlory",
+            "nextGoal": "WinKey",
+            "subGoals": [
+                {
+                    "type": "GloryGoal"
+                }
+            ]
+        },
+        {
+            "name": "WinKey",
+            "nextStory": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "unlocks": ["HouseOfTheKeyFriends"],
+            "flags": {"unlockAchievementWithStoryPrefix": "HIPPIECOMMUNE_WIN"}
+        }
+    ],
+    "startGoal": "Start",
+    "lockPermanents": ["WoodcuttingCentre", "School", "IndoorFarm", "SecretSocietyHouse"],
+    "worlds": [
+        {
+            "rect": {
+                "x": -500,
+                "y": 140,
+                "width": 1020,
+                "height": 100
+            },
+            "seed": 15000,
+            "worldResources": [
+                { "position": 1, "className": "Forest" },
+                { "position": 4, "className": "AlienRuins" },
+                { "position": 6, "className": "Rock" },
+                { "position": 8, "className": "Rock" },
+                { "position": 12, "className": "Forest" },
+                { "position": 15, "className": "Rock" },
+                { "position": 19, "className": "Forest" },
+                { "position": 20, "className": "AlienRuins" },
+                { "position": 22, "className": "BranchyForest" },
+                { "position": 24, "className": "Forest" },
+                { "position": 26, "className": "Forest" },
+                { "position": 28, "className": "BranchyForest" },
+                { "position": 31, "className": "Rock" },
+                { "position": 32, "className": "BranchyForest" },
+                { "position": 33, "className": "Rock" },
+                { "position": 38, "className": "AlienRuins" },
+                { "position": 41, "className": "Rock" },
+                { "position": 43, "className": "Forest" },
+                { "position": 44, "className": "BranchyForest" },
+                { "position": 45, "className": "Forest" },
+                { "position": 49, "className": "Forest" }
+            ],
+            "decorations": [
+                { "position": 0, "spriteName": "spr_flowers" },
+                { "position": 7, "spriteName": "spr_flowers" },
+                { "position": 23, "spriteName": "spr_flowers" },
+                { "position": 27, "spriteName": "spr_flowers" },
+                { "position": 38, "spriteName": "spr_flowers" },
+                { "position": 50, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [
+                { "position": 25, "classNames": ["BlossomHippieHQ"] }
+            ],
+            "citizens": [
+                { "amount": 17, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 400, "maxX": 600 }
+            ]
+        },
+        {
+            "rect": {
+                "x": -800,
+                "y": 40,
+                "width": 300,
+                "height": 60
+            },
+            "seed": 15001,
+            "worldResources": [
+                { "position": 1, "className": "Forest" },
+                { "position": 3, "className": "Rock" },
+                { "position": 4, "className": "AlienRuins" },
+                { "position": 5, "className": "Rock" },
+                { "position": 7, "className": "Forest" },
+                { "position": 10, "className": "Rock" }
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -1200,
+                "y": 200,
+                "width": 500,
+                "height": 70
+            },
+            "seed": 15002,
+            "worldResources": [
+                { "position": 0, "className": "Rock" },
+                { "position": 4, "className": "Forest" },
+                { "position": 6, "className": "Forest" },
+                { "position": 10, "className": "Rock" },
+                { "position": 11, "className": "Forest" },
+                { "position": 16, "className": "Rock" },
+                { "position": 19, "className": "Forest" },
+                { "position": 20, "className": "Rock" },
+                { "position": 21, "className": "Forest" },
+                { "position": 24, "className": "Rock" }
+            ],
+            "decorations": [
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 460,
+                "y": 280,
+                "width": 400,
+                "height": 70
+            },
+            "seed": 15003,
+            "worldResources": [
+                { "position": 0, "className": "Rock" },
+                { "position": 1, "className": "PineForest" },
+                { "position": 2, "className": "Rock" },
+                { "position": 4, "className": "Forest" },
+                { "position": 10, "className": "Rock" },
+                { "position": 12, "className": "Rock" },
+                { "position": 15, "className": "Forest" },
+                { "position": 17, "className": "Forest" },
+                { "position": 19, "className": "PineForest" }
+            ],
+            "decorations": [
+                { "position": 3, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 820,
+                "y": 100,
+                "width": 400,
+                "height": 60
+            },
+            "seed": 15003,
+            "worldResources": [
+                { "position": 1, "className": "Rock" },
+                { "position": 4, "className": "Rock" },
+                { "position": 5, "className": "Rock" },
+                { "position": 9, "className": "Forest" },
+                { "position": 11, "className": "Rock" },
+                { "position": 15, "className": "Forest" }
+            ],
+            "decorations": [
+                { "position": 14, "spriteName": "spr_flowers" },
+                { "position": 16, "spriteName": "spr_flowers" }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        }
+    ],
+    "initialMaterials": {
+        "food": 120,
+        "stone": 15,
+        "wood": 30,
+        "knowledge": 50,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 200,
+    "viewStartX": 10,
+    "useInviteCitizens": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 1,
+            "x": -400,
+            "y": 300,
+            "velocity": 0.7
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 0,
+            "x": 100,
+            "y": 0,
+            "velocity": 0.3
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 5,
+            "x": -430,
+            "y": -150,
+            "velocity": -0.56
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 5,
+            "x": 900,
+            "y": -500,
+            "velocity": 0.9
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 3,
+            "x": 500,
+            "y": 530,
+            "velocity": 1.35
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 4,
+            "x": -1120,
+            "y": 600,
+            "velocity": 1.25
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 2,
+            "x": -900,
+            "y": -300,
+            "velocity": -0.89
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 3,
+            "x": 600,
+            "y": 100,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 0,
+            "x": 1300,
+            "y": 300,
+            "velocity": 0.7
+        },
+        {
+            "sprite": "spr_planets_giant",
+            "width": 140,
+            "image": 0,
+            "x": -70,
+            "y": 700,
+            "velocity": 0.3
+        }
+    ],
+    "skyColors": [
+        {"color": "#281460", "time": 0},
+        {"color": "#281460", "time": 4},
+        {"color": "#bf5f71", "time": 6},
+        {"color": "#bf5f71", "time": 6.5},
+        {"color": "#ADC8FF", "time": 8.5},
+        {"color": "#ADC8FF", "time": 11},
+        {"color": "#BAE2FC", "time": 13},
+        {"color": "#BAE2FC", "time": 17},
+        {"color": "#845ba3", "time": 20.5},
+        {"color": "#845ba3", "time": 21},
+        {"color": "#281460", "time": 23},
+        {"color": "#281460", "time": 24}
+    ],
+    "buildingCostChanges": [{
+        "className": "EcoFarm",
+        "wood": 3,
+        "stone": 6
+    }, {
+        "className": "HippieSchool",
+        "wood": 15
+    }, {
+        "className": "RefinedMetalFactory",
+        "knowledge": 200,
+        "wood": 45,
+        "stone": 60
+    }, {
+        "className": "FarmHouse",
+        "knowledge": 700
+    }, {
+        "className": "FestivalHQ",
+        "wood": 25000,
+        "knowledge": 20000
+    }]
+}

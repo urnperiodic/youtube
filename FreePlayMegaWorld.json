@@ -1,0 +1,369 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "nextGoal": "InvitePeople",
+            "subGoals": [
+                {
+                    "type": "Wait",
+                    "waitTime": 1
+                }
+            ],
+            "unlocks": ["ComputerChipFactory", "ExperimentationLab"],
+            "researches": ["ComputerChipFactory", "ExperimentationLab", "StoneTeleporter", "ComfortableHouse", "RefinedMetalFactory", "Workshop", "Teleporter", "SecretSocietyHouse", "LandingSite", "MachinePartsFactory", "MechanicalHouse"]
+        },
+        {
+            "name": "InvitePeople",
+            "nextGoal": "ImproveEconomy",
+            "subGoals": [
+                {
+                    "type": "InvitePeople"
+                }
+            ],
+            "showTutorial": 4001
+        },
+        {
+            "name": "ImproveEconomy",
+            "nextGoal": "BuildSculptures",
+            "subGoals": [
+                {
+                    "type": "ProductionGoal",
+                    "materials": {
+                        "knowledge": 50,
+                        "stone": 100,
+                        "food": 100
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BuildSculptures",
+            "nextGoal": "HaveEnoughPeople",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "StatueGarden",
+                    "amount": 5
+                }
+            ],
+            "unlocks": ["StatueGarden"]
+        },
+        {
+            "name": "HaveEnoughPeople",
+            "nextGoal": "GatherKnowledge",
+            "subGoals": [
+                {
+                    "type": "MinimumCitizens",
+                    "number": 300
+                }
+            ]
+        },
+        {
+            "name": "GatherKnowledge",
+            "nextGoal": "BuildTeleporters",
+            "subGoals": [
+                {
+                    "type": "ProductionGoal",
+                    "materials": {
+                        "knowledge": 150
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BuildTeleporters",
+            "nextGoal": "BuildLuxuryRestaurants",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "Teleporter",
+                    "amount": 5
+                }
+            ]
+        },
+        {
+            "name": "BuildLuxuryRestaurants",
+            "nextGoal": "ImproveOurHousing",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "LuxuryRestaurant",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["LuxuryRestaurant"]
+        },
+        {
+            "name": "ImproveOurHousing",
+            "nextGoal": "BuildLuxuryHousing",
+            "subGoals": [
+                {
+                    "type": "PerformCityUpgrade",
+                    "upgradeClass": "SecretiveLiving",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "BuildLuxuryHousing",
+            "nextGoal": "FinalGlory",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "Villa",
+                    "amount": 3
+                }
+            ],
+            "unlocks": ["Villa"]
+        },
+        {
+            "name": "FinalGlory",
+            "nextGoal": "GatherKnowledge2",
+            "subGoals": [
+                {
+                    "type": "GloryGoal"
+                }
+            ]
+        },
+        {
+            "name": "GatherKnowledge2",
+            "nextGoal": "BuildTheMachine",
+            "subGoals": [
+                {
+                    "type": "ProductionGoal",
+                    "materials": {
+                        "knowledge": 750
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BuildTheMachine",
+            "nextGoal": "Win",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "TheMachine",
+                    "amount": 1
+                }
+            ],
+            "unlocks": ["TheMachine"]
+        },
+        {
+            "name": "Win",
+            "nextStory": "rocketLaunch",
+            "nextGoal": "",
+            "subGoals": [],
+            "unlocks": ["HouseOfTheKeyFriends"],
+            "flags": {"unlockAchievementWithStoryPrefix": "CITYOFTHEKEY_WIN"}
+        }
+    ],
+    "startGoal": "Start",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": -900,
+                "y": 140,
+                "width": 820,
+                "height": 100
+            },
+            "seed": 14000,
+            "worldResources": [
+                { "position": 0, "className": "PineForest" },
+                { "position": 4, "className": "AlienRuins" },
+                { "position": 5, "className": "Rock" },
+                { "position": 9, "className": "AlienRuins" },
+                { "position": 12, "className": "Rock" },
+                { "position": 14, "className": "Rock" },
+                { "position": 18, "className": "PineForest" },
+                { "position": 22, "className": "Rock" },
+                { "position": 23, "className": "PineForest" },
+                { "position": 28, "className": "Rock" },
+                { "position": 27, "className": "PineForest" }
+            ],
+            "decorations": [
+                { "position": 34, "spriteName": "spr_flowers_keycity" },
+                { "position": 38, "spriteName": "spr_flowers_keycity" }
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["Pub"] },
+                { "position": 20, "classNames": ["LandedExplorationShip"] },
+                { "position": 40, "classNames": ["LandingSite"] },
+                { "position": 35, "classNames": ["RooftopDecoration*false.9"] },
+                { "position": 36, "classNames": ["Teleporter", "RooftopDecoration2*false.9"] },
+                { "position": 37, "classNames": ["RooftopDecoration*true.9"] },
+                { "position": 24, "classNames": ["Laboratory", "IndoorFarm", "Laboratory", "TreePlantation", "RooftopDecoration*true.10"] },
+                { "position": 25, "classNames": ["IndoorFarm", "Laboratory", "TreePlantation", "Laboratory", "RooftopDecoration2*false.10"] },
+                { "position": 26, "classNames": ["Laboratory", "IndoorFarm", "Laboratory", "TreePlantation", "RooftopDecoration*false.10"] },
+                { "position": 30, "classNames": ["StoneMine", "StoneMine", "StoneMine", "StoneMine", "RooftopDecoration"] },
+                { "position": 31, "classNames": ["StoneMine", "StoneTeleporter", "StoneMine", "StoneMine", "StoneMine", "RooftopDecoration2*false.0"] },
+                { "position": 32, "classNames": ["StoneMine", "StoneMine", "StoneMine", "StoneMine", "RooftopDecoration*true.0"] }
+            ],
+            "citizens": [
+                { "amount": 24, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 700, "maxX": 790 }
+            ],
+            "decoration": "spr_decoration_keycity",
+            "appearance": "key"
+        },
+        {
+            "rect": {
+                "x": 0,
+                "y": 140,
+                "width": 20,
+                "height": 20
+            },
+            "seed": 14003,
+            "worldResources": [
+            ],
+            "buildingStacks": [
+                { "position": 0, "classNames": ["SecretSocietyHouse", "LandingSite"] }
+            ],
+            "citizens": [
+                { "amount": 8, "ageRangeMin": 40, "ageRangeMax": 45, "minX": 2, "maxX": 18 }
+            ],
+            "decoration": "spr_decoration_keycity",
+            "appearance": "key2",
+            "protectedKey": true
+        },
+        {
+            "rect": {
+                "x": 100,
+                "y": 140,
+                "width": 820,
+                "height": 100
+            },
+            "seed": 14001,
+            "worldResources": [
+                { "position": 40, "className": "PineForest" },
+                { "position": 36, "className": "AlienRuins" },
+                { "position": 35, "className": "Rock" },
+                { "position": 31, "className": "AlienRuins" },
+                { "position": 28, "className": "Rock" },
+                { "position": 26, "className": "Rock" },
+                { "position": 22, "className": "PineForest" },
+                { "position": 18, "className": "Rock" },
+                { "position": 17, "className": "PineForest" },
+                { "position": 13, "className": "PineForest" },
+                { "position": 12, "className": "Rock" }
+            ],
+            "decorations": [
+                { "position": 2, "spriteName": "spr_flowers_keycity" },
+                { "position": 6, "spriteName": "spr_flowers_keycity" }
+            ],
+            "buildingStacks": [
+                { "position": 3, "classNames": ["RooftopDecoration*false.9"] },
+                { "position": 4, "classNames": ["Teleporter", "RooftopDecoration2*false.9"] },
+                { "position": 5, "classNames": ["RooftopDecoration*true.9"] },
+                { "position": 0, "classNames": ["LandingSite"]},
+                { "position": 14, "classNames": ["MechanicalHouse", "RefinedMetalFactory", "ExperimentationLab", "RefinedMetalFactory", "LandingSite"] },
+                { "position": 15, "classNames": ["MachinePartsFactory", "ComputerResearchCenter", "ComputerChipFactory", "LandingSite"] },
+                { "position": 16, "classNames": ["MechanicalHouse", "RefinedMetalFactory", "ExperimentationLab", "RefinedMetalFactory", "LandingSite"] },
+                { "position": 10, "classNames": ["ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "RooftopDecoration*true.3"] },
+                { "position": 9, "classNames": ["Workshop", "ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "RooftopDecoration2*false.3"] },
+                { "position": 8, "classNames": ["ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "ComfortableHouse", "RooftopDecoration*false.3"] },
+                { "position": 20, "classNames": ["LandedExplorationShip_mirrored"]},
+                { "position": 39, "classNames": ["Pub"] }
+            ],
+            "citizens": [
+                { "amount": 24, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 2, "maxX": 100 }
+            ],
+            "decoration": "spr_decoration_keycity",
+            "appearance": "key"
+        }
+    ],
+    "initialMaterials": {
+        "food": 400,
+        "stone": 150,
+        "wood": 100,
+        "knowledge": 200,
+        "machineParts": 10,
+        "refinedMetal": 10,
+        "computerChips": 3
+    },
+    "viewYFromBottom": 200,
+    "viewStartX": 10,
+    "useInviteCitizens": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 0,
+            "x": -50,
+            "y": -700,
+            "velocity": 0.62
+        },
+        {
+            "sprite": "spr_planet_ring_small",
+            "width": 192,
+            "image": 0,
+            "x": 250,
+            "y": -200,
+            "velocity": 0.51
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 0,
+            "x": 0,
+            "y": 0,
+            "velocity": 0
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 5,
+            "x": -430,
+            "y": -150,
+            "velocity": -0.56
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 2,
+            "x": 800,
+            "y": -300,
+            "velocity": 0.93
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 3,
+            "x": 700,
+            "y": 530,
+            "velocity": 1.35
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 0,
+            "x": -1080,
+            "y": 550,
+            "velocity": 1.25
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 3,
+            "x": -800,
+            "y": -500,
+            "velocity": -0.99
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 1,
+            "x": 100,
+            "y": 100,
+            "velocity": 0.4
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 3,
+            "x": -100,
+            "y": -100,
+            "velocity": 0.4
+        }
+    ]
+}

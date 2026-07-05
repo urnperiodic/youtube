@@ -1,0 +1,135 @@
+{
+    "goals": [
+        {
+            "name": "FreePlayStart",
+            "title": "",
+            "text": "",
+            "quickText": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "planning": []
+        }
+    ],
+    "startGoal": "FreePlayStart",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": 0,
+                "y": 160,
+                "width": 3000,
+                "height": 100
+            },
+            "seed": 2001,
+            "worldResources": [
+                { "position": 0, "className": "Rock" },
+                { "position": 4, "className": "Rock" },
+                { "position": 5, "className": "Rock" },
+                { "position": 7, "className": "Rock" },
+                { "position": 9, "className": "Boulder" },
+                { "position": 10, "className": "Rock" },
+                { "position": 11, "className": "Boulder" },
+                { "position": 12, "className": "Rock" },
+                { "position": 18, "className": "Rock" },
+                { "position": 19, "className": "Rock" },
+                { "position": 22, "className": "Rock" },
+                { "position": 25, "className": "Rock" },
+                { "position": 26, "className": "Rock" },
+                { "position": 32, "className": "Rock" },
+                { "position": 34, "className": "Rock" },
+                { "position": 37, "className": "Rock" },
+                { "position": 45, "className": "Rock" },
+                { "position": 48, "className": "Rock" },
+                { "position": 49, "className": "Rock" },
+                { "position": 61, "className": "Rock" },
+                { "position": 63, "className": "Rock" },
+                { "position": 67, "className": "Rock" },
+                { "position": 69, "className": "Rock" },
+                { "position": 70, "className": "Rock" },
+                { "position": 74, "className": "Rock" },
+                { "position": 78, "className": "Rock" },
+                { "position": 88, "className": "Rock" },
+                { "position": 89, "className": "Rock" },
+                { "position": 90, "className": "Rock" },
+                { "position": 102, "className": "Rock" },
+                { "position": 105, "className": "Rock" },
+                { "position": 107, "className": "Rock" },
+                { "position": 110, "className": "Rock" },
+                { "position": 111, "className": "Rock" },
+                { "position": 117, "className": "Rock" },
+                { "position": 119, "className": "Rock" },
+                { "position": 125, "className": "Rock" },
+                { "position": 127, "className": "Rock" },
+                { "position": 129, "className": "Rock" },
+                { "position": 130, "className": "Rock" },
+                { "position": 131, "className": "Boulder" },
+                { "position": 134, "className": "Rock" },
+                { "position": 139, "className": "Rock" },
+                { "position": 141, "className": "Rock" },
+                { "position": 143, "className": "Rock" },
+                { "position": 148, "className": "Rock" }
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["NormalHouse"] }
+            ],
+            "citizens": [
+                { "amount": 3, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 60, "maxX": 80 }
+            ],
+            "decoration": "spr_decoration_rocks",
+            "appearance": "rock"
+        }
+    ],
+    "initialMaterials": {
+        "food": 100,
+        "stone": 20,
+        "wood": 100,
+        "knowledge": 0,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "isFreePlay": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 0,
+            "x": -230,
+            "y": -200,
+            "velocity": -1.5
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 2,
+            "x": 10,
+            "y": 200,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 1,
+            "x": 100,
+            "y": 500,
+            "velocity": 0.24
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 0,
+            "x": 510,
+            "y": -130,
+            "velocity": 1.1
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 6,
+            "x": 1000,
+            "y": -450,
+            "velocity": 1.3
+        }
+    ]
+}

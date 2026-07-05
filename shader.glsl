@@ -1,0 +1,38 @@
+[
+    {
+        "className": "FoodRationing",
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "machineParts": 0,
+        "knowledge": 0,
+        "unlockedByDefault": true
+    },
+    {
+        "className": "SmallerClasses",
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "machineParts": 0,
+        "knowledge": 0,
+        "unlockedByDefault": true
+    },
+    {
+        "className": "MandatoryOvertime",
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "machineParts": 0,
+        "knowledge": 0,
+        "unlockedByDefault": true
+    },
+    {
+        "className": "HippieLifestyle",
+        "food": 0,
+        "wood": 0,
+        "stone": 0,
+        "machineParts": 0,
+        "knowledge": 0,
+        "unlockedByDefault": false
+    }
+]

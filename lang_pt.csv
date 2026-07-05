@@ -1,0 +1,25 @@
+(function() {
+    var greenworks = require("../greenworks");
+
+    window.SteamUnlockAchievement = function(achievementName) {
+        greenworks.activateAchievement(achievementName, function() {
+
+        });
+    }
+
+    window.getYourMods = function(pageNum, onDone) {
+        greenworks.ugcGetUserItems({page_num: pageNum, app_id: 1180130}, greenworks.UGCMatchingType.Items,
+            greenworks.UserUGCListSortOrder.LastUpdatedDesc,
+            greenworks.UserUGCList.Published, function(items) {
+                onDone(items);
+            }, function() {});
+    }
+
+    window.getInstalledMods = function(pageNum, onDone) {
+        greenworks.ugcGetUserItems({page_num: pageNum, app_id: 1180130}, greenworks.UGCMatchingType.Items,
+            greenworks.UserUGCListSortOrder.LastUpdatedDesc,
+            greenworks.UserUGCList.Subscribed, function(items) {
+                onDone(items);
+            }, function() {});
+    }
+})();

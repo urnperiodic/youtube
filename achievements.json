@@ -1,0 +1,520 @@
+{
+    "goals": [
+        {
+            "name": "Start",
+            "nextGoal": "BuildBridges",
+            "subGoals": [
+                {
+                    "type": "MinimumHappiness",
+                    "happiness": 75
+                }
+            ],
+            "planning": [
+                {
+                    "type": "FreeAutoUpgradeForFarms",
+                    "time": -1
+                }],
+            "unlocks": ["ExperimentationLab", "BotanicalGardens", "BotanicalGardensDome", "Loft", "CityHall"],
+            "researches": ["ExperimentationLab", "StoneTeleporter", "ComfortableHouse", "RefinedMetalFactory", "Workshop", "Teleporter", "LandingSite", "MachinePartsFactory", "MechanicalHouse", "SpaciousHouse", "BotanicalGardens", "BotanicalGardensDome", "MedicalClinic", "Loft", "ExperimentalFarm"]
+        },
+        {
+            "name": "BuildBridges",
+            "nextGoal": "MakeComputerChips1",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "Build3Bridges"
+                }
+            ]
+        },
+        {
+            "name": "MakeComputerChips1",
+            "nextGoal": "MakeComputerChips",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "ComputerChipFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeComputerChips",
+            "nextGoal": "BuildSuperComputer",
+            "subGoals": [
+                {
+                    "type": "ProductionGoal",
+                    "materials": {
+                        "computerChips": 30
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BuildSuperComputer",
+            "nextGoal": "MakeGraphene",
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "Supercomputer",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeGraphene",
+            "nextGoal": "MakeGrapheneBuilding",
+            "unlocks": ["GrapheneLab"],
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "GrapheneLab",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeGrapheneBuilding",
+            "nextGoal": "MakeGraphene2",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "BuildFloatingPlatform"
+                }
+            ]
+        },
+        {
+            "name": "MakeGraphene2",
+            "nextGoal": "MakeRocketLaunch",
+            "unlocks": ["GrapheneFactory"],
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "GrapheneFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeRocketLaunch",
+            "nextGoal": "MakeFuelFactories",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "RocketLaunchPlatform",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeFuelFactories",
+            "nextGoal": "MakeRocket",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "BuildPermanents",
+                    "permanentToBuildClass": "RocketFuelFactory",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "MakeRocket",
+            "nextGoal": "LaunchRocket",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "BuildRocket"
+                }
+            ]
+        },
+        {
+            "name": "LaunchRocket",
+            "nextGoal": "Win",
+            "unlocks": [],
+            "subGoals": [
+                {
+                    "type": "PerformCityUpgrade",
+                    "upgradeClass": "RocketSubCityRockWorld",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "name": "Win",
+            "nextStory": "hippiecommune",
+            "nextGoal": "",
+            "subGoals": [],
+            "unlocks": [],
+            "flags": {"unlockAchievementWithStoryPrefix": "ROCKETLAUNCH_WIN"}
+        }
+    ],
+    "startGoal": "Start",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": -100,
+                "y": 160,
+                "width": 1180,
+                "height": 100
+            },
+            "seed": 15001,
+            "worldResources": [
+                { "position": 9, "className": "Boulder" },
+                { "position": 19, "className": "Boulder" },
+                { "position": 23, "className": "Boulder" },
+                { "position": 35, "className": "Boulder" },
+                { "position": 43, "className": "Boulder" },
+                { "position": 51, "className": "Boulder" }
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["MechanicalHouse", "MachinePartsFactory", "MechanicalHouse", "RooftopDecoration*false.19"] },
+                { "position": 2, "classNames": ["NULL", "MechanicalHouse"] },
+                { "position": 3, "classNames": ["MechanicalHouse", "MachinePartsFactory", "MechanicalHouse", "RooftopDecoration*false.19"] },
+                { "position": 4, "classNames": ["NULL", "MechanicalHouse"] },
+                { "position": 5, "classNames": ["MechanicalHouse", "MachinePartsFactory", "MechanicalHouse", "RooftopDecoration*false.19"] },
+                { "position": 6, "classNames": ["NULL", "MechanicalHouse"] },
+                { "position": 7, "classNames": ["MechanicalHouse", "MachinePartsFactory", "MechanicalHouse", "RooftopDecoration*false.19"] },
+                {"position": 11, "classNames": ["StoneMine", "StoneMine", "RooftopDecoration*false.0"]},
+                {"position": 12, "classNames": ["StoneTeleporter", "StoneMine", "StoneMine"]},
+                {"position": 13, "classNames": ["StoneMine", "StoneMine", "RooftopDecoration*true.0"]},
+                {"position": 14, "classNames": ["StoneMine", "StoneMine", "LandingSite"]},
+                {"position": 15, "classNames": ["StoneMine", "StoneMine", "RooftopDecoration*false.0"]},
+                {"position": 16, "classNames": ["StoneTeleporter", "StoneMine", "StoneMine"]},
+                {"position": 17, "classNames": ["StoneMine", "StoneMine", "RooftopDecoration*true.0"]},
+                {"position": 21, "classNames": ["MedicalClinic", "Loft"]},
+                {"position": 37, "classNames": ["SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse"]},
+                {"position": 38, "classNames": ["BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardensDome"]},
+                {"position": 39, "classNames": ["SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "LandingSite"]},
+                {"position": 40, "classNames": ["BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardens", "BotanicalGardensDome"]},
+                {"position": 41, "classNames": ["SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse", "SpaciousHouse"]},
+                {"position": 45, "classNames": ["IndoorFarm", "Laboratory", "IndoorFarm", "Laboratory", "IndoorFarm", "Loft"]},
+                {"position": 46, "classNames": ["Laboratory", "TreePlantation", "Laboratory", "IndoorFarm", "Laboratory", "IndoorFarm", "Loft"]},
+                {"position": 47, "classNames": ["TreePlantation", "Laboratory", "ExperimentalFarm", "Laboratory", "IndoorFarm", "Laboratory", "IndoorFarm"]},
+                {"position": 48, "classNames": ["Laboratory", "TreePlantation", "Laboratory", "IndoorFarm", "Laboratory", "IndoorFarm", "Loft_mirrored"]},
+                {"position": 49, "classNames": ["IndoorFarm", "Laboratory", "IndoorFarm", "Laboratory", "IndoorFarm", "Loft_mirrored"]},
+                {"position": 53, "classNames": ["ExperimentationLab", "RefinedMetalFactory", "ExperimentationLab", "RefinedMetalFactory", "RooftopDecoration2*false.18"]},
+                {"position": 54, "classNames": ["SpaciousHouse", "NULL", "RefinedMetalFactory", "RooftopDecoration4*false.18"]},
+                {"position": 55, "classNames": ["SpaciousHouse", "SpaciousHouse", "ExperimentationLab", "RefinedMetalFactory", "RooftopDecoration2*false.18"]},
+                {"position": 56, "classNames": ["SpaciousHouse", "NULL", "RefinedMetalFactory", "RooftopDecoration4*false.18"]},
+                {"position": 57, "classNames": ["ExperimentationLab", "RefinedMetalFactory", "ExperimentationLab", "RefinedMetalFactory", "RooftopDecoration2*false.18"]}
+            ],
+            "citizens": [
+                { "amount": 160, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 0, "maxX": 1170 }
+            ],
+            "decoration": "spr_decoration_rocks",
+            "appearance": "rock:lessJagged"
+        },
+        {
+            "rect": {
+                "x": -400,
+                "y": 200,
+                "width": 220,
+                "height": 60
+            },
+            "seed": 15002,
+            "worldResources": [
+                {
+                    "position": 2,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 5,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 7,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 8,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 6,
+                    "className": "AlienRuins"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -780,
+                "y": 160,
+                "width": 100,
+                "height": 40
+            },
+            "seed": 15004,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 3,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 4,
+                    "className": "PineForest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -860,
+                "y": 240,
+                "width": 40,
+                "height": 30
+            },
+            "seed": 15005,
+            "worldResources": [
+                {
+                    "position": 1,
+                    "className": "PineForest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": -740,
+                "y": 300,
+                "width": 300,
+                "height": 60
+            },
+            "seed": 15003,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 2,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 3,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 5,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 10,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 1,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 14,
+                    "className": "PineForest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 1100,
+                "y": 300,
+                "width": 340,
+                "height": 65
+            },
+            "seed": 15010,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 3,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 5,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 6,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 11,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 12,
+                    "className": "AlienRuins"
+                },
+                {
+                    "position": 13,
+                    "className": "Rock"
+                },
+                {
+                    "position": 15,
+                    "className": "PineForest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 1400,
+                "y": 180,
+                "width": 260,
+                "height": 49
+            },
+            "seed": 15011,
+            "worldResources": [
+                {
+                    "position": 3,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 4,
+                    "className": "Rock"
+                },
+                {
+                    "position": 5,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 12,
+                    "className": "PineForest"
+                },
+                {
+                    "position": 10,
+                    "className": "PineForest"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 1700,
+                "y": 220,
+                "width": 80,
+                "height": 39
+            },
+            "seed": 15012,
+            "worldResources": [
+                {
+                    "position": 0,
+                    "className": "Rock"
+                },
+                {
+                    "position": 2,
+                    "className": "Rock"
+                }
+            ],
+            "buildingStacks": [],
+            "citizens": []
+        }
+    ],
+    "initialMaterials": {
+        "food": 400,
+        "stone": 150,
+        "wood": 100,
+        "knowledge": 200,
+        "machineParts": 20,
+        "refinedMetal": 20,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "isFreePlay": true,
+    "useInviteCitizens": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 1,
+            "x": 200,
+            "y": 700,
+            "velocity": -0.3
+        },
+        {
+            "sprite": "spr_planets_giant",
+            "width": 140,
+            "image": 1,
+            "x": 300,
+            "y": -200,
+            "velocity": 1.2
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 0,
+            "x": -200,
+            "y": 30,
+            "velocity": 0.93
+        },
+        {
+            "sprite": "spr_planets_giant",
+            "width": 140,
+            "image": 0,
+            "x": -600,
+            "y": -400,
+            "velocity": 0.77
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 0,
+            "x": 1200,
+            "y": 200,
+            "velocity": 0.93
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 2,
+            "x": 50,
+            "y": -460,
+            "velocity": 0.25
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 0,
+            "x": -300,
+            "y": 360,
+            "velocity": -0.17
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 1,
+            "x": 800,
+            "y": -200,
+            "velocity": 0.4
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 2,
+            "x": -870,
+            "y": 130,
+            "velocity": -0.422
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 3,
+            "x": 950,
+            "y": 500,
+            "velocity": 0.2851
+        }
+    ]
+}

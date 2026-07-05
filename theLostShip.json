@@ -1,0 +1,161 @@
+{
+    "goals": [
+        {
+            "name": "FreePlayStart",
+            "title": "",
+            "text": "",
+            "quickText": "",
+            "nextGoal": "",
+            "subGoals": [],
+            "planning": [
+                {
+                    "type": "BuildBridgeFeather",
+                    "time": 0
+                }],
+            "unlocks": []
+        }
+    ],
+    "startGoal": "FreePlayStart",
+    "lockPermanents": [],
+    "worlds": [
+        {
+            "rect": {
+                "x": -600,
+                "y": 160,
+                "width": 580,
+                "height": 76
+            },
+            "seed": 2202,
+            "worldResources": [
+                {"position": 1, "className": "Forest"},
+                {"position": 4, "className": "Rock"},
+                {"position": 5, "className": "Forest"},
+                {"position": 8, "className": "Forest"},
+                {"position": 9, "className": "BranchyForest"},
+                {"position": 13, "className": "BranchyForest"},
+                {"position": 14, "className": "Rock"},
+                {"position": 15, "className": "Boulder"},
+                {"position": 16, "className": "Rock"},
+                {"position": 23, "className": "Forest"},
+                {"position": 26, "className": "Forest"},
+                {"position": 28, "className": "Forest"}
+            ],
+            "decorations": [
+                { "position": 0, "spriteName": "spr_flowers_blue" },
+                { "position": 10, "spriteName": "spr_flowers_blue" },
+                { "position": 22, "spriteName": "spr_flowers_blue" },
+                { "position": 24, "spriteName": "spr_flowers_blue" }
+            ],
+            "buildingStacks": [
+                { "position": 27, "classNames": ["TinkerersHome", "TinkerersHome", "RooftopDecoration2*false.4"] }],
+            "citizens": []
+        },
+        {
+            "rect": {
+                "x": 0,
+                "y": 160,
+                "width": 600,
+                "height": 78
+            },
+            "seed": 2201,
+            "worldResources": [
+                {"position": 0, "className": "BranchyForest"},
+                {"position": 2, "className": "Forest"},
+                {"position": 9, "className": "Rock"},
+                {"position": 12, "className": "BranchyForest"},
+                {"position": 14, "className": "Forest"},
+                {"position": 16, "className": "Forest"},
+                {"position": 18, "className": "Forest"},
+                {"position": 19, "className": "BranchyForest"},
+                {"position": 23, "className": "Forest"},
+                {"position": 24, "className": "Rock"},
+                {"position": 25, "className": "Forest"},
+                {"position": 27, "className": "Rock"},
+                {"position": 29, "className": "Rock"}
+            ],
+            "decorations": [
+                { "position": 3, "spriteName": "spr_flowers_blue" },
+                { "position": 6, "spriteName": "spr_flowers_blue" },
+                { "position": 17, "spriteName": "spr_flowers_blue" },
+                { "position": 22, "spriteName": "spr_flowers_blue" },
+                { "position": 28, "spriteName": "spr_flowers_blue" }
+            ],
+            "buildingStacks": [
+                { "position": 1, "classNames": ["TinkerersHome", "TinkerersHome", "RooftopDecoration2*false.4"] },
+                { "position": 17, "classNames": ["TinkerersHome", "RooftopDecoration2*false.4"] }
+            ],
+            "citizens": [
+                { "amount": 3, "ageRangeMin": 20, "ageRangeMax": 25, "minX": 60, "maxX": 80 }
+            ]
+        }
+    ],
+    "initialMaterials": {
+        "food": 100,
+        "stone": 20,
+        "wood": 20,
+        "knowledge": 0,
+        "machineParts": 0,
+        "refinedMetal": 0,
+        "computerChips": 0
+    },
+    "viewYFromBottom": 270,
+    "isFreePlay": true,
+    "backgroundSprites": [
+        {
+            "sprite": "spr_planet_ring_big",
+            "width": 277,
+            "image": 0,
+            "x": -400,
+            "y": -170,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 2,
+            "x": -100,
+            "y": -600,
+            "velocity": -0.8
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 4,
+            "x": 0,
+            "y": 200,
+            "velocity": 0.5
+        },
+        {
+            "sprite": "spr_planets_small",
+            "width": 40,
+            "image": 0,
+            "x": 0,
+            "y": 800,
+            "velocity": 0.2
+        },
+        {
+            "sprite": "spr_planets_bigger",
+            "width": 120,
+            "image": 1,
+            "x": 500,
+            "y": -300,
+            "velocity": -1.2
+        },
+        {
+            "sprite": "spr_planets_big",
+            "width": 100,
+            "image": 0,
+            "x": 1000,
+            "y": 200,
+            "velocity": 0.56
+        },
+        {
+            "sprite": "spr_planets_medium",
+            "width": 80,
+            "image": 2,
+            "x": -800,
+            "y": 700,
+            "velocity": 0.5
+        }
+    ]
+}
